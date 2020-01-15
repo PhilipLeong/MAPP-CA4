@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "290799514073",
+    "firebase_url": "https://bookhub-b3c99.firebaseio.com",
+    "project_id": "bookhub-b3c99",
+    "storage_bucket": "bookhub-b3c99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290799514073:android:0bd21f262534ab9defe9c8",
+        "android_client_info": {
+          "package_name": "mapp.com.sg.bookhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290799514073-r6bh2v8ffq88iufebnei16hapqbth4r0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2T9Mc8mbCYlyQwkln0AB1W8wHZh2Ys7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290799514073-r6bh2v8ffq88iufebnei16hapqbth4r0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
