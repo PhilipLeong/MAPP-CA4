@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loginForm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:translationY="30dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/account_icon"
+        android:drawablePadding="15dp"
+        android:text="Account"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationX="50dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <requestFocus/>
+    </TextView>
+
+    <EditText
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:textSize="14sp"
+        android:theme="@style/EditTextTheme"
+        android:translationX="50dp" />"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/password_icon"
+        android:drawablePadding="15dp"
+        android:text="Password"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationX="50dp" />
+
+    <EditText
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:theme="@style/EditTextTheme"
+        android:translationX="50dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginsignupbutton"
+            android:text="@string/logintext"
+            android:textColor="#FFFFFF"
+            android:translationY="10dp"
+            />
+    </LinearLayout>
+</LinearLayout>

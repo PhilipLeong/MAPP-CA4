@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout
+    android:id="@+id/loginForm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:translationY="30dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/uploadprofilepic_imgbtn" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:text="Upload profile picture"
+        android:textAlignment="center"
+        android:textColor="#5C99E4"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:translationX="137dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <requestFocus/>
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/account_icon"
+        android:drawablePadding="15dp"
+        android:text="Account"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationX="50dp" />
+
+    <EditText
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:textSize="14sp"
+        android:theme="@style/EditTextTheme"
+        android:translationX="50dp" />"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/email_icon"
+        android:drawablePadding="15dp"
+        android:text="Email"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationX="50dp" />
+
+    <EditText
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:theme="@style/EditTextTheme"
+        android:translationX="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/password_icon"
+        android:drawablePadding="15dp"
+        android:text="Password"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationX="50dp" />
+
+    <EditText
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:theme="@style/EditTextTheme"
+        android:translationX="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/course_icon"
+        android:drawablePadding="15dp"
+        android:text="School / Course"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationX="50dp" />
+
+    <EditText
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:theme="@style/EditTextTheme"
+        android:translationX="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/bio_icon"
+        android:drawablePadding="15dp"
+        android:text="Bio"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationX="50dp" />
+
+    <EditText
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:theme="@style/EditTextTheme"
+        android:translationX="50dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/signup_btn"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginsignupbutton"
+            android:text="@string/signuptext"
+            android:textColor="#FFFFFF"
+            android:translationY="10dp" />
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

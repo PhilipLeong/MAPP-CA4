@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">BookHub</string>
+    <string name="logintext">Login</string>
+    <string name="signuptext">Sign up</string>
 </resources>
