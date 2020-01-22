@@ -9,19 +9,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/account_icon"
+        android:drawableStart="@drawable/email_icon"
         android:drawablePadding="15dp"
-        android:text="Account"
+        android:text="Email"
         android:textAlignment="center"
         android:textSize="14sp"
-        android:translationX="50dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:translationX="50dp" >
         >
         <requestFocus/>
     </TextView>
 
     <EditText
+        android:id="@+id/loginemail_input"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:singleLine="false"
@@ -33,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:drawableStart="@drawable/password_icon"
+        android:drawableStart="@drawable/pwd_icon"
         android:drawablePadding="15dp"
         android:text="Password"
         android:textAlignment="center"
@@ -41,6 +40,8 @@
         android:translationX="50dp" />
 
     <EditText
+        android:id="@+id/loginpassword_input"
+        android:inputType="textPassword"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:textSize="14sp"
