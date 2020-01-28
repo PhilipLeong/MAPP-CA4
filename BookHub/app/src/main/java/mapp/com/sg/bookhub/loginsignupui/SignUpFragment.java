@@ -1,9 +1,12 @@
 package mapp.com.sg.bookhub.loginsignupui;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,9 +53,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     private EditText editTextSchoolCourse;
     private EditText editTextBio;
     private CircleImageView profilePic;
+    private Dialog errorDialog;
+    private ImageButton cross;
     private FirebaseFirestore db;
     int TAKE_IMAGE_CODE =  10001;
     public static final String TAG = "YOUR-TAG-NAME";
+
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     private ProgressDialog progessDialog;
 
@@ -70,9 +78,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         editTextBio = (EditText) rootView.findViewById(R.id.bio_input);
         registerButton =(Button)rootView.findViewById(R.id.signup_btn);
         profilePic = (CircleImageView) rootView.findViewById(R.id.uploadProfilepic_ImgBtn);
+        errorDialog = new Dialog(getContext());
+        errorDialog.setContentView(R.layout.custompopup);
+        cross = errorDialog.findViewById(R.id.exit_btn);
 
         progessDialog = new ProgressDialog(getContext());
 
+        cross.setOnClickListener(this);
         registerButton.setOnClickListener(this);
         profilePic.setOnClickListener(this);
         return rootView;
@@ -85,9 +97,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         final String schoolcourse = editTextSchoolCourse.getText().toString().trim();
         final String bio = editTextBio.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(account) || TextUtils.isEmpty(schoolcourse) || TextUtils.isEmpty(bio)){
             //Email is empty
-            Toast.makeText(getContext(), "Please enter email", Toast.LENGTH_SHORT).show();
+            showPopup();
             return;
         }
 
@@ -195,7 +207,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
                     }
                 });
     }
-
+    private void showPopup(){
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        errorDialog.show();
+    }
     @Override
     public void onClick(View view){
         if(view == registerButton){
@@ -203,6 +218,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         }
         if(view == profilePic){
             uploadPicture();
+        }
+        if(view == cross){
+            errorDialog.dismiss();
         }
     }
 }

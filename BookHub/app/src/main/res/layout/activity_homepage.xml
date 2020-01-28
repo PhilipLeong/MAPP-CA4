@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/logo_IV"
+        android:layout_width="241dp"
+        android:layout_height="187dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32"
+        app:srcCompat="@drawable/logo" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/homepage_Grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.933">
+
+        <ImageButton
+            android:id="@+id/store_ImgBtn"
+            android:layout_width="166dp"
+            android:layout_height="131dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#00000000"
+            android:scaleType="centerCrop"
+            app:layout_column="0"
+            app:layout_row="0"
+            app:srcCompat="@drawable/store" />
+
+        <ImageButton
+            android:id="@+id/post_ImgBtn"
+            android:layout_width="166dp"
+            android:layout_height="131dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#00000000"
+            android:scaleType="centerCrop"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:srcCompat="@drawable/post" />
+
+        <ImageButton
+            android:id="@+id/profile_ImgBtn"
+            android:layout_width="166dp"
+            android:layout_height="131dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="#00000000"
+            android:scaleType="centerCrop"
+            app:layout_column="0"
+            app:layout_row="1"
+            app:srcCompat="@drawable/profile" />
+
+        <ImageButton
+            android:id="@+id/logout_ImgBtn"
+            android:layout_width="166dp"
+            android:layout_height="131dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#00000000"
+            android:scaleType="centerCrop"
+            app:layout_column="1"
+            app:layout_row="1"
+            app:srcCompat="@drawable/logout" />
+
+    </androidx.gridlayout.widget.GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
