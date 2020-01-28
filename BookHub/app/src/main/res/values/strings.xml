@@ -1,4 +1,6 @@
 <resources>
     <string name="logintext">Login</string>
     <string name="signuptext">Sign up</string>
+    <string name="app_name">BookHub</string>
+    <string name="slogan">Spend less. Read more.</string>
 </resources>

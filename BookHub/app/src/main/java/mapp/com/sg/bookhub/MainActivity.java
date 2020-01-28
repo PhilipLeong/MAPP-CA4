@@ -1,6 +1,5 @@
 package mapp.com.sg.bookhub;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private Button registerButton;
     private EditText editTextEmail;
     private EditText editTextPassword;
-
-    private ProgressDialog progessDialog;
-
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -40,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-
-
 
     }
 }

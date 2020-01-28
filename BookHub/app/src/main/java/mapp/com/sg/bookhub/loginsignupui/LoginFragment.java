@@ -1,6 +1,10 @@
 package mapp.com.sg.bookhub.loginsignupui;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -8,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import mapp.com.sg.bookhub.HomeActivity;
 import mapp.com.sg.bookhub.R;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
@@ -27,8 +33,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private ProgressDialog progressDialog;
+    private Dialog errorDialog;
     private FirebaseAuth firebaseAuth;
-
+    private ImageButton cross;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,7 +51,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         editTextEmail = (EditText) rootView.findViewById(R.id.loginemail_input);
         editTextPassword = (EditText) rootView.findViewById(R.id.loginpassword_input);
         progressDialog = new ProgressDialog(getContext());
+        errorDialog = new Dialog(getContext());
+        errorDialog.setContentView(R.layout.custompopup);
+        cross = errorDialog.findViewById(R.id.exit_btn);
 
+        cross.setOnClickListener(this);
         signinButton.setOnClickListener(this);
         return rootView;
     }
@@ -53,17 +64,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
-            //Email is empty
-            Toast.makeText(getContext(), "Please enter email", Toast.LENGTH_SHORT).show();
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){
+            showPopup();
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
-            //Password is empty
-            Toast.makeText(getContext(),"Please enter password", Toast.LENGTH_SHORT).show();
-            return;
-        }
         progressDialog.setMessage("Logging in...");
         progressDialog.show();
 
@@ -74,7 +79,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             Toast.makeText(getContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
-                            //Start profile activity here
+                            Intent intent = new Intent(getContext(), HomeActivity.class);
+                            startActivity(intent);
                         }
                         else{
                             Toast.makeText(getContext(), "Unsuccessful, please try again", Toast.LENGTH_SHORT).show();
@@ -84,9 +90,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
     }
+
+    private void startHomepage(){
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void showPopup(){
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        errorDialog.show();
+    }
     public void onClick(View view){
         if(view == signinButton) {
             userLogin();
+        }
+        if(view == cross){
+            errorDialog.dismiss();
         }
     }
 }
