@@ -79,7 +79,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         registerButton =(Button)rootView.findViewById(R.id.signup_btn);
         profilePic = (CircleImageView) rootView.findViewById(R.id.uploadProfilepic_ImgBtn);
         errorDialog = new Dialog(getContext());
-        errorDialog.setContentView(R.layout.custompopup);
+        errorDialog.setContentView(R.layout.errorpopup);
         cross = errorDialog.findViewById(R.id.exit_btn);
 
         progessDialog = new ProgressDialog(getContext());
@@ -207,6 +207,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
                     }
                 });
     }
+
+
     private void showPopup(){
         errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         errorDialog.show();

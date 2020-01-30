@@ -32,7 +32,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -70,8 +69,6 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     private EditText location;
     private EditText schedule;
     private RadioGroup radioGroup1;
-    private RadioGroup radioGroup2;
-    private RadioGroup radioGroup3;
     private RadioButton radioSelected;
     private CheckBox chkpaynow;
     private CheckBox chkcash;
@@ -80,18 +77,31 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     private String userId;
     private List<String> payments;
 
+    private List<String> imgs;
+
+
     private ImageButton add1;
     private ImageButton add2;
     private ImageButton add3;
 
     private FirebaseFirestore db;
     private static final String TAG = "PostActivity";
-    int TAKE_IMAGE_CODE =  10001;
+    private int TAKE_IMAGE_CODE = 10001;
+
+
+    private ByteArrayOutputStream img1;
+    private ByteArrayOutputStream img2;
+    private ByteArrayOutputStream img3;
+
+
+    private int currentUploadLoc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.postfragment);
+
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -114,8 +124,6 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         schedule = (EditText) findViewById(R.id.schedule_Input);
 
         radioGroup1 = (RadioGroup) findViewById(R.id.rbGrp1);
-        radioGroup2 = (RadioGroup) findViewById(R.id.rbGrp2);
-        radioGroup3 = (RadioGroup) findViewById(R.id.rbGrp3);
 
         chkpaynow = (CheckBox) findViewById(R.id.paynow_Chkbox);
         chkpaylah = (CheckBox) findViewById(R.id.paylah_Chkbox);
@@ -131,67 +139,258 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         add3.setOnClickListener(this);
 
         errorDialog = new Dialog(this);
-        errorDialog.setContentView(R.layout.custompopup);
+        errorDialog.setContentView(R.layout.errorpopup);
         errorCross = errorDialog.findViewById(R.id.exit_btn);
         errorCross.setOnClickListener(this);
         errorTV = errorDialog.findViewById(R.id.error_TV);
 
+        successDialog = new Dialog(this);
+        successDialog.setContentView(R.layout.successpopup);
+        successCross = successDialog.findViewById(R.id.back_btn);
+        successCross.setOnClickListener(this);
+        successTV = successDialog.findViewById(R.id.success_TV);
+
         progessDialog = new ProgressDialog(this);
+        imgs = new ArrayList<>();
     }
 
 
-    private void backToMainPage(){
+    private void backToMainPage() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
 
 
-    private void makepost(){
+    private void takeBookPic() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
+            startActivityForResult(intent, TAKE_IMAGE_CODE);
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TAKE_IMAGE_CODE) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    if (currentUploadLoc == 1) {
+                        add1.setImageBitmap(bitmap);
+                        img1 = handleUpload(bitmap);
+                    }
+                    if (currentUploadLoc == 2) {
+                        add2.setImageBitmap(bitmap);
+                        img2 = handleUpload(bitmap);
+                    }
+                    if (currentUploadLoc == 3) {
+                        add3.setImageBitmap(bitmap);
+                        img3 = handleUpload(bitmap);
+                    }
+            }
+        }
+    }
+
+    private ByteArrayOutputStream handleUpload(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos;
+    }
+
+
+    public void upload1(ByteArrayOutputStream baos) {
+        final StorageReference reference = FirebaseStorage.getInstance().getReference()
+                .child("bookImages")
+                .child(userId + Math.random() * 1000 * Math.random() + ".jpeg");
+
+        reference.putBytes(baos.toByteArray())
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                          public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                              Log.d(TAG, "canupload");
+                                              reference.getDownloadUrl()
+                                                      .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                          public void onSuccess(Uri uri) {
+                                                              Log.d(TAG, "get uri");
+                                                              imgs.add(uri.toString());
+                                                              if(img2 != null){
+                                                                  upload2(img2);
+                                                              }
+                                                              else if (img3 != null){
+                                                                  upload3(img3);
+                                                              }
+                                                              else{
+                                                                  Log.d(TAG,imgs.get(0));
+                                                                  posttodb(imgs);
+                                                              }
+                                                          }
+                                                      });
+                                          }
+                                      }
+                )
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "onFailure", e.getCause());
+                        showErrorPopup("Can't upload pictures");
+                    }
+                });
+    }
+
+    public void upload2(ByteArrayOutputStream baos) {
+        final StorageReference reference = FirebaseStorage.getInstance().getReference()
+                .child("bookImages")
+                .child(userId + Math.random() * 1000 * Math.random() + ".jpeg");
+
+        reference.putBytes(baos.toByteArray())
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                          public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                              Log.d(TAG, "canupload");
+                                              reference.getDownloadUrl()
+                                                      .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                          public void onSuccess(Uri uri) {
+                                                              imgs.add(uri.toString());
+                                                              if (img3 != null) {
+                                                                  upload3(img3);
+                                                              }
+                                                              else{
+                                                                  posttodb(imgs);
+                                                              }
+                                                          }
+                                                      });
+                                          }
+                                      }
+                )
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "onFailure", e.getCause());
+                        showErrorPopup("Can't upload pictures");
+                    }
+                });
+    }
+
+    public void upload3(ByteArrayOutputStream baos) {
+        final StorageReference reference = FirebaseStorage.getInstance().getReference()
+                .child("bookImages")
+                .child(userId + Math.random() * 1000 * Math.random() + ".jpeg");
+
+        reference.putBytes(baos.toByteArray())
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                          public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                              Log.d(TAG, "canupload");
+                                              reference.getDownloadUrl()
+                                                      .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                          public void onSuccess(Uri uri) {
+                                                              Log.d(TAG, "get uri");
+                                                              imgs.add(uri.toString());
+                                                              posttodb(imgs);
+                                                          }
+                                                      });
+                                          }
+                                      }
+                )
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "onFailure", e.getCause());
+                        showErrorPopup("Can't upload pictures");
+                    }
+                });
+    }
+
+    private void showErrorPopup(String errorMessage) {
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        errorTV.setText(errorMessage);
+        errorDialog.show();
+    }
+
+    private void showSuccessPopup(String successMessage) {
+        successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        successTV.setText(successMessage);
+        successDialog.show();
+    }
+
+    public void onClick(View view) {
+        if (view == backBtn || view == successCross) {
+            backToMainPage();
+        }
+        if (view == postBtn) {
+            makepost();
+        }
+        if (view == add1) {
+            currentUploadLoc = 1;
+            takeBookPic();
+        }
+
+        if (view == add2) {
+            currentUploadLoc = 2;
+            takeBookPic();
+        }
+
+        if (view == add3) {
+            currentUploadLoc = 3;
+            takeBookPic();
+        }
+
+        if (view == errorCross) {
+            errorDialog.dismiss();
+        }
+    }
+
+
+    private void makepost() {
+
+        if (img1 != null) {
+            upload1(img1);
+        }
+        else if (img2 != null){
+            upload2(img2);
+        }
+        else if (img3 !=null){
+            upload3(img3);
+        }
+        else {
+            showErrorPopup("Please upload at least 1 images.");
+            return;
+        }
+    }
+
+
+    private void posttodb (List<String> uris){
+
+        Log.d("GET URI IN POST?", uris.get(0));
         Double massFinal = 0.0;
         Double priceFinal = 0.0;
         String schoolInput;
         //Get and validate radio button, (School input)
         int selectedId = radioGroup1.getCheckedRadioButtonId();
-        if(selectedId != -1){
+        if (selectedId != -1) {
             radioSelected = (RadioButton) findViewById(radioGroup1.getCheckedRadioButtonId());
             schoolInput = radioSelected.getText().toString();
-        }
-        else {
-            selectedId = radioGroup2.getCheckedRadioButtonId();
-            if (selectedId != -1){
-                radioSelected = (RadioButton) findViewById(radioGroup2.getCheckedRadioButtonId());
-                schoolInput = radioSelected.getText().toString();
-            }
-            else{
-                selectedId = radioGroup3.getCheckedRadioButtonId();
-                if (selectedId != -1){
-                    radioSelected = (RadioButton) findViewById(radioGroup3.getCheckedRadioButtonId());
-                    schoolInput = radioSelected.getText().toString();
-                }
-                else{
-                    showErrorPopup("Please select the school :).");
-                    return;
-                }
-            }
+        } else {
+            showErrorPopup("Please select the school :).");
+            return;
         }
 
 
         //Get checkbox
         payments.clear();
-        if (chkcash.isChecked()){
+        if (chkcash.isChecked()) {
             payments.add(chkcash.getText().toString());
         }
-        if (chkpaylah.isChecked()){
+        if (chkpaylah.isChecked()) {
             payments.add(chkpaylah.getText().toString());
         }
-        if (chkpaynow.isChecked()){
+        if (chkpaynow.isChecked()) {
             payments.add(chkpaynow.getText().toString());
         }
-        if (payments.size() == 0){
+        if (payments.size() == 0) {
             showErrorPopup("Please check at least one payment method.");
             return;
         }
+
 
         String titleInput = title.getText().toString().trim();
         String conditionInput = condition.getText().toString().trim();
@@ -201,90 +400,43 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         String scheduleInput = schedule.getText().toString().trim();
 
 
-        if(TextUtils.isEmpty(titleInput) || TextUtils.isEmpty(conditionInput) || TextUtils.isEmpty(scheduleInput) || TextUtils.isEmpty(locationInput)|| TextUtils.isEmpty(massInput)|| TextUtils.isEmpty(priceInput) ){
+        if (TextUtils.isEmpty(titleInput) || TextUtils.isEmpty(conditionInput) || TextUtils.isEmpty(scheduleInput) || TextUtils.isEmpty(locationInput) || TextUtils.isEmpty(massInput) || TextUtils.isEmpty(priceInput)) {
             showErrorPopup("Please don't leave any field blank.");
             return;
         }
 
-        try{
+        try {
             massFinal = Double.parseDouble(massInput);
             priceFinal = Double.parseDouble(priceInput);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             showErrorPopup("Please provide valid Mass / Price input.");
             return;
         }
 
 
         //start input into database
-        Post newPost = new Post (titleInput, conditionInput, massFinal, priceFinal, locationInput, scheduleInput, schoolInput, payments, userId);
+        Post newPost = new Post(titleInput, conditionInput, massFinal, priceFinal, locationInput, scheduleInput, schoolInput, payments, userId, uris);
+
 
         progessDialog.setMessage("Posting in progress...");
         progessDialog.show();
+
 
         db.collection("Posts").document().set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 progessDialog.dismiss();
-                //Toast.makeText(getApplicationContext(),"You have made a post! ",Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(),"You have made a post! ",Toast.LENGTH_SHORT);
                 Log.d(TAG, "Make a post successfully!");
+                showSuccessPopup("You have made a post!");
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error happened in posting", e);
+                        showErrorPopup("Post failed! Please Try again.");
                     }
                 });
-        ;
-
-    }
-
-
-
-    private void uploadBookPic(){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(intent.resolveActivity(getApplicationContext().getPackageManager()) != null){
-            startActivityForResult(intent, TAKE_IMAGE_CODE);
-        }
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if ( requestCode == TAKE_IMAGE_CODE){
-            switch(resultCode){
-                case Activity.RESULT_OK:
-                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                    add1.setImageBitmap(bitmap);
-                    //handleUpload(bitmap);
-            }
-        }
-    }
-
-
-
-    private void showErrorPopup(String errorMessage){
-        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        errorTV.setText(errorMessage);
-        errorDialog.show();
-    }
-
-
-
-    public void onClick(View view){
-        if(view == backBtn){
-            backToMainPage();
-        }
-        if(view == postBtn){
-            makepost();
-        }
-        if(view == add1 || view == add2 || view == add3){
-            uploadBookPic();
-        }
-        if(view == errorCross){
-            errorDialog.dismiss();
-        }
     }
 }

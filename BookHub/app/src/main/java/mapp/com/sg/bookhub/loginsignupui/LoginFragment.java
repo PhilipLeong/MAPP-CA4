@@ -52,7 +52,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         editTextPassword = (EditText) rootView.findViewById(R.id.loginpassword_input);
         progressDialog = new ProgressDialog(getContext());
         errorDialog = new Dialog(getContext());
-        errorDialog.setContentView(R.layout.custompopup);
+        errorDialog.setContentView(R.layout.errorpopup);
         cross = errorDialog.findViewById(R.id.exit_btn);
 
         cross.setOnClickListener(this);

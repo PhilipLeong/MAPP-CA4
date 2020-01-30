@@ -1,8 +1,11 @@
 package mapp.com.sg.bookhub.Models;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class Post {
+
+
     private String title;
     private String condition;
     private Double mass;
@@ -12,11 +15,12 @@ public class Post {
     private String school;
     private List<String> payments;
     private String createdBy;
+    private List<String> imgs;
 
 
     public Post(){}
 
-    public Post(String title, String condition, Double mass, Double price, String location, String schedule, String school, List<String> payments, String createdBy){
+    public Post(String title, String condition, Double mass, Double price, String location, String schedule, String school, List<String> payments, String createdBy, List<String> imgs){
         this.title = title;
         this.condition = condition;
         this.mass = mass;
@@ -26,6 +30,7 @@ public class Post {
         this.school = school;
         this.payments = payments;
         this.createdBy = createdBy;
+        this.imgs = imgs;
     }
 
 
@@ -99,5 +104,13 @@ public class Post {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public List<String> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
     }
 }

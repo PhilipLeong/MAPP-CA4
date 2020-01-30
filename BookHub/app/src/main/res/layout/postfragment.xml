@@ -101,90 +101,102 @@
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
 
-                <RadioGroup
-                    android:id="@+id/rbGrp1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp">
+            <RadioGroup
+                android:id="@+id/rbGrp1"
+                android:layout_width="wrap_content"
+                android:layout_height="85dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp">
+
+                <RelativeLayout
+                    android:layout_width="361dp"
+                    android:layout_height="match_parent">
+
 
                     <RadioButton
                         android:id="@+id/soc_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="SOC" />
 
                     <RadioButton
                         android:id="@+id/abe_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="42dp"
                         android:text="ABE" />
-                </RadioGroup>
-
-                <RadioGroup
-                    android:id="@+id/rbGrp2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginRight="30dp">
 
                     <RadioButton
                         android:id="@+id/sb_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="104dp"
+                        android:layout_marginTop="4dp"
                         android:text="SB" />
 
                     <RadioButton
                         android:id="@+id/eee_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="42dp"
+                        android:layout_marginStart="104dp"
                         android:text="EEE" />
-                </RadioGroup>
-
-                <RadioGroup
-                    android:id="@+id/rbGrp3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginRight="30dp">
 
                     <RadioButton
                         android:id="@+id/mae_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="185dp"
                         android:text="MAE" />
 
                     <RadioButton
                         android:id="@+id/sma_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="42dp"
+                        android:layout_marginStart="185dp"
                         android:text="SMA" />
-                </RadioGroup>
-
-                <RadioGroup
-                    android:id="@+id/rbGrp4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="85dp"
-                    android:layout_marginRight="30dp">
 
                     <RadioButton
                         android:id="@+id/cls_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="270dp"
                         android:text="CLS" />
 
                     <RadioButton
                         android:id="@+id/mad_RadioBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="42dp"
+                        android:layout_marginStart="270dp"
                         android:text="MAD" />
-                </RadioGroup>
+                </RelativeLayout>
 
-            </LinearLayout>
+            </RadioGroup>
+
 
             <TextView
                 android:id="@+id/textView4"
@@ -292,13 +304,13 @@
                 android:id="@+id/post_Btn"
                 android:layout_width="380dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/loginsignupbutton"
                 android:text="Post"
                 android:textColor="#FFFFFF"
                 android:textSize="23sp"
                 android:textStyle="bold"
-                android:translationY="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:translationY="10dp" />
         </LinearLayout>
 
     </ScrollView>
