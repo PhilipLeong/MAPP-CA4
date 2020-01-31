@@ -1,6 +1,11 @@
 <resources>
     <string name="logintext">Login</string>
     <string name="signuptext">Sign up</string>
+    <string name="purchasedtext">Purchased</string>
+    <string name="listingstext">Listings</string>
     <string name="app_name">BookHub</string>
     <string name="slogan">Spend less. Read more.</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

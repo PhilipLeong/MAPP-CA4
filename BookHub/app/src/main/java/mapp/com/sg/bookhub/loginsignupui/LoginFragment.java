@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -98,6 +99,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private void showPopup(){
         errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView msg = errorDialog.findViewById(R.id.error_TV);
+        msg.setText("Please enter valid credentials");
         errorDialog.show();
     }
     public void onClick(View view){
