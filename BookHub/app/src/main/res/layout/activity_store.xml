@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/pageTitle_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:text="Store"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:translationY="18dp" />
+
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp">
+
+        <Button
+            android:id="@+id/soc_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/soclogo"
+            android:text="SOC"
+            app:layout_column="0"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/sb_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/sblogo"
+            android:text="SB"
+            app:layout_column="1"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/mae_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/maelogo"
+            android:text="MAE"
+            app:layout_column="0"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/cls_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/clslogo"
+            android:text="CLS"
+            app:layout_column="1"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/abe_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/abelogo"
+            android:text="ABE"
+            app:layout_column="0"
+            app:layout_row="2" />
+
+        <Button
+            android:id="@+id/eee_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/eeelogo"
+            android:text="EEE"
+            app:layout_column="1"
+            app:layout_row="2" />
+
+        <Button
+            android:id="@+id/mad_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/madlogo"
+            android:text="MAD"
+            app:layout_column="0"
+            app:layout_row="3" />
+
+        <Button
+            android:id="@+id/sma_Btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:height="120dp"
+            android:background="#00FFFFFF"
+            android:drawableTop="@drawable/smalogo"
+            android:text="SMA"
+            app:layout_column="1"
+            app:layout_row="3" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <include layout="@layout/bottommenu" />
+</LinearLayout>

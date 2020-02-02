@@ -1,12 +1,31 @@
 package mapp.com.sg.bookhub.Models;
 
 import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.util.List;
 
-public class Post {
-
+public class Post implements Serializable {
 
     private String title;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    private String author;
+    private String isbn;
     private String condition;
     private Double mass;
     private Double price;
@@ -17,11 +36,12 @@ public class Post {
     private String createdBy;
     private List<String> imgs;
 
+    private String key;
 
-    public Post(){}
-
-    public Post(String title, String condition, Double mass, Double price, String location, String schedule, String school, List<String> payments, String createdBy, List<String> imgs){
+    public Post(String title, String author, String isbn, String condition, Double mass, Double price, String location, String schedule, String school, List<String> payments, String createdBy, List<String> imgs) {
         this.title = title;
+        this.author = author;
+        this.isbn = isbn;
         this.condition = condition;
         this.mass = mass;
         this.price = price;
@@ -31,6 +51,19 @@ public class Post {
         this.payments = payments;
         this.createdBy = createdBy;
         this.imgs = imgs;
+    }
+
+
+
+    public Post(){}
+
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
 

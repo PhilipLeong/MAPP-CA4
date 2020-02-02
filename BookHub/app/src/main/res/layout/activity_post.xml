@@ -2,280 +2,363 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".PostActivity"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/topbar"/>
+    <include layout="@layout/topbar" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="121dp"
-        android:background="@color/lightgrey"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
-
-        <ImageButton
-            android:id="@+id/addImgBtn1"
-            android:background="#00000000"
-            android:layout_width="97dp"
-            android:layout_height="97dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/add_icon" />
-
-        <ImageButton
-            android:id="@+id/addImgBtn2"
-            android:background="#00000000"
-            android:layout_width="97dp"
-            android:layout_height="97dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/add_icon"  />
-
-        <ImageButton
-            android:id="@+id/addImgBtn3"
-            android:background="#00000000"
-            android:layout_width="97dp"
-            android:layout_height="97dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/add_icon" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add basic details"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Book Title – ISBN – Author Name"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:layout_marginLeft="20dp">
 
-    <EditText
-        android:id="@+id/book_Input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Item Condition"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/itemcond_Input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="School"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
-
-        <RadioGroup
-            android:id="@+id/rbGrp1"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="30dp">
-
-            <RadioButton
-                android:id="@+id/soc_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SOC" />
-
-            <RadioButton
-                android:id="@+id/abe_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ABE" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/rbGrp2"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:layout_marginRight="30dp">
-
-            <RadioButton
-                android:id="@+id/sb_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SB" />
-
-            <RadioButton
-                android:id="@+id/eee_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EEE" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/rbGrp3"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:layout_marginRight="30dp">
-
-            <RadioButton
-                android:id="@+id/mae_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MAE" />
-
-            <RadioButton
-                android:id="@+id/sma_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SMA" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/rbGrp4"
-            android:layout_width="wrap_content"
-            android:layout_height="85dp"
-            android:layout_marginRight="30dp">
-
-            <RadioButton
-                android:id="@+id/cls_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CLS" />
-
-            <RadioButton
-                android:id="@+id/mad_RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MAD" />
-        </RadioGroup>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:text="Mass (kg)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/mass_Input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Price (S$)"
-        android:layout_margin="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/price_Input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Payment"
-        android:layout_margin="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
-
-
-        <CheckBox
-            android:id="@+id/paynow_Chkbox"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="PayNow" />
+            android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/cash_Chkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cash" />
+            <LinearLayout
+                android:layout_width="305dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/lightgrey"
+                android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/paylah_Chkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Paylah" />
-    </LinearLayout>
+                <ImageButton
+                    android:id="@+id/addImgBtn1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:background="#00000000"
+                    android:src="@drawable/addimg_icon" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:layout_margin="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"  />
+                <ImageButton
+                    android:id="@+id/addImgBtn2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:background="#00000000"
+                    android:src="@drawable/addimg_icon" />
 
-    <EditText
-        android:id="@+id/location_Input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Schedule"
-        android:layout_margin="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"  />
+                <ImageButton
+                    android:id="@+id/addImgBtn3"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:background="#00000000"
+                    android:src="@drawable/addimg_icon" />
 
-    <EditText
-        android:id="@+id/schedule"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+            </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add basic details"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Book Title"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/book_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="ISBN"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/isbn_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Author"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/author_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Item Condition"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/itemcond_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="School"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+
+            <RadioGroup
+                android:id="@+id/rbGrp1"
+                android:layout_width="370dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal">
+
+
+                <RadioButton
+                    android:id="@+id/soc_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="4dp"
+                    android:text="SOC" />
+
+                <RadioButton
+                    android:id="@+id/sb_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="4dp"
+                    android:text="SB" />
+
+                <RadioButton
+                    android:id="@+id/mae_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="40dp"
+                    android:text="MAE" />
+
+
+
+                <RadioButton
+                    android:id="@+id/cls_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="40dp"
+                    android:text="CLS" />
+
+
+            </RadioGroup>>
+
+
+
+
+            <RadioGroup
+                android:id="@+id/rbGrp2"
+                android:layout_width="370dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <RadioButton
+                    android:id="@+id/eee_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="2dp"
+                    android:text="EEE" />
+
+                <RadioButton
+                    android:id="@+id/abe_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:text="ABE" />
+
+                    <RadioButton
+                        android:id="@+id/sma_RadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="32dp"
+                        android:text="SMA" />
+
+                    <RadioButton
+                        android:id="@+id/mad_RadioBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="40dp"
+                        android:text="MAD" />
+
+
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Mass (kg)"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/mass_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Price (S$)"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/price_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Payment"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+
+                <CheckBox
+                    android:id="@+id/paynow_Chkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="PayNow" />
+
+                <CheckBox
+                    android:id="@+id/cash_Chkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cash" />
+
+                <CheckBox
+                    android:id="@+id/paylah_Chkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Paylah" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Location"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/location_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Schedule"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/schedule_Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/post_Btn"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/loginsignupbutton"
+                android:text="Post"
+                android:textColor="#FFFFFF"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:translationY="10dp" />
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

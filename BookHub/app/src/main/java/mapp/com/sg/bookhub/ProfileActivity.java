@@ -30,7 +30,7 @@ import mapp.com.sg.bookhub.profileui.SectionsPagerAdapter;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private static final String TAG = "";
+    private static final String TAG = "My Profile";
     private TextView email;
     private TextView username;
     private TextView bio;

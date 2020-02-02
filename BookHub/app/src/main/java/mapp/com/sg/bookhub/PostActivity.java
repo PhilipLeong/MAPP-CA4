@@ -44,7 +44,7 @@ import java.util.List;
 import mapp.com.sg.bookhub.Models.Post;
 
 
-public class PostActivity extends AppCompatActivity implements View.OnClickListener {
+public class PostActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private TextView pageTitle;
     private ImageButton backBtn;
@@ -68,7 +68,11 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     private EditText price;
     private EditText location;
     private EditText schedule;
+    private EditText isbn;
+    private EditText author;
     private RadioGroup radioGroup1;
+    private RadioGroup radioGroup2;
+
     private RadioButton radioSelected;
     private CheckBox chkpaynow;
     private CheckBox chkcash;
@@ -100,7 +104,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.postfragment);
+        setContentView(R.layout.activity_post);
 
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -122,8 +126,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         price = (EditText) findViewById(R.id.price_Input);
         location = (EditText) findViewById(R.id.location_Input);
         schedule = (EditText) findViewById(R.id.schedule_Input);
+        isbn = (EditText) findViewById(R.id.isbn_Input);
+        author = (EditText) findViewById(R.id.author_Input);
 
-        radioGroup1 = (RadioGroup) findViewById(R.id.rbGrp1);
 
         chkpaynow = (CheckBox) findViewById(R.id.paynow_Chkbox);
         chkpaylah = (CheckBox) findViewById(R.id.paylah_Chkbox);
@@ -152,14 +157,18 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
         progessDialog = new ProgressDialog(this);
         imgs = new ArrayList<>();
-    }
 
+
+        radioGroup1 = (RadioGroup) findViewById(R.id.rbGrp1);
+        radioGroup2 = (RadioGroup) findViewById(R.id.rbGrp2);
+        radioGroup1.setOnCheckedChangeListener(this);
+        radioGroup2.setOnCheckedChangeListener(this);
+    }
 
     private void backToMainPage() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
-
 
 
     private void takeBookPic() {
@@ -214,14 +223,12 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                                                           public void onSuccess(Uri uri) {
                                                               Log.d(TAG, "get uri");
                                                               imgs.add(uri.toString());
-                                                              if(img2 != null){
+                                                              if (img2 != null) {
                                                                   upload2(img2);
-                                                              }
-                                                              else if (img3 != null){
+                                                              } else if (img3 != null) {
                                                                   upload3(img3);
-                                                              }
-                                                              else{
-                                                                  Log.d(TAG,imgs.get(0));
+                                                              } else {
+                                                                  Log.d(TAG, imgs.get(0));
                                                                   posttodb(imgs);
                                                               }
                                                           }
@@ -253,8 +260,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                                                               imgs.add(uri.toString());
                                                               if (img3 != null) {
                                                                   upload3(img3);
-                                                              }
-                                                              else{
+                                                              } else {
                                                                   posttodb(imgs);
                                                               }
                                                           }
@@ -344,34 +350,37 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
         if (img1 != null) {
             upload1(img1);
-        }
-        else if (img2 != null){
+        } else if (img2 != null) {
             upload2(img2);
-        }
-        else if (img3 !=null){
+        } else if (img3 != null) {
             upload3(img3);
-        }
-        else {
+        } else {
             showErrorPopup("Please upload at least 1 images.");
             return;
         }
     }
 
 
-    private void posttodb (List<String> uris){
+    private void posttodb(List<String> uris) {
 
-        Log.d("GET URI IN POST?", uris.get(0));
         Double massFinal = 0.0;
         Double priceFinal = 0.0;
         String schoolInput;
+
         //Get and validate radio button, (School input)
         int selectedId = radioGroup1.getCheckedRadioButtonId();
         if (selectedId != -1) {
             radioSelected = (RadioButton) findViewById(radioGroup1.getCheckedRadioButtonId());
             schoolInput = radioSelected.getText().toString();
         } else {
-            showErrorPopup("Please select the school :).");
-            return;
+            selectedId = radioGroup2.getCheckedRadioButtonId();
+            if (selectedId != -1) {
+                radioSelected = (RadioButton) findViewById(radioGroup2.getCheckedRadioButtonId());
+                schoolInput = radioSelected.getText().toString();
+            } else {
+                showErrorPopup("Please select the school :).");
+                return;
+            }
         }
 
 
@@ -398,9 +407,11 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         String priceInput = price.getText().toString().trim();
         String locationInput = location.getText().toString().trim();
         String scheduleInput = schedule.getText().toString().trim();
+        String isbnInput = isbn.getText().toString().trim();
+        String authorInput = author.getText().toString().trim();
 
 
-        if (TextUtils.isEmpty(titleInput) || TextUtils.isEmpty(conditionInput) || TextUtils.isEmpty(scheduleInput) || TextUtils.isEmpty(locationInput) || TextUtils.isEmpty(massInput) || TextUtils.isEmpty(priceInput)) {
+        if (TextUtils.isEmpty(titleInput) || TextUtils.isEmpty(conditionInput) || TextUtils.isEmpty(scheduleInput) || TextUtils.isEmpty(locationInput) || TextUtils.isEmpty(massInput) || TextUtils.isEmpty(priceInput) || TextUtils.isEmpty(isbnInput) || TextUtils.isEmpty(authorInput)) {
             showErrorPopup("Please don't leave any field blank.");
             return;
         }
@@ -415,18 +426,16 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //start input into database
-        Post newPost = new Post(titleInput, conditionInput, massFinal, priceFinal, locationInput, scheduleInput, schoolInput, payments, userId, uris);
-
+        Post newPost = new Post(titleInput, authorInput, isbnInput, conditionInput, massFinal, priceFinal, locationInput, scheduleInput, schoolInput, payments, userId, uris);
 
         progessDialog.setMessage("Posting in progress...");
         progessDialog.show();
-
 
         db.collection("Posts").document().set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 progessDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"You have made a post! ",Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "You have made a post! ", Toast.LENGTH_SHORT);
                 Log.d(TAG, "Make a post successfully!");
                 showSuccessPopup("You have made a post!");
             }
@@ -438,5 +447,25 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                         showErrorPopup("Post failed! Please Try again.");
                     }
                 });
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+       if (group == radioGroup1) {
+
+            int selectedId = radioGroup2.getCheckedRadioButtonId();
+            if (selectedId != -1) {
+                radioGroup2.setOnCheckedChangeListener(null);
+                radioGroup2.clearCheck();
+                radioGroup2.setOnCheckedChangeListener(this);
+            }
+        } else if (group == radioGroup2) {
+            int selectedId = radioGroup1.getCheckedRadioButtonId();
+            if (selectedId != -1) {
+                radioGroup1.setOnCheckedChangeListener(null);
+                radioGroup1.clearCheck();
+                radioGroup1.setOnCheckedChangeListener(this);
+            }
+        }
     }
 }

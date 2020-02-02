@@ -14,7 +14,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton postbtn;
     private ImageButton profilebtn;
     private ImageButton logoutbtn;
+    private ImageButton storebtn;
     private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +26,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         postbtn = (ImageButton) findViewById(R.id.post_ImgBtn);
         profilebtn = (ImageButton) findViewById(R.id.profile_ImgBtn);
         logoutbtn = (ImageButton) findViewById(R.id.logout_ImgBtn);
+        storebtn = (ImageButton) findViewById(R.id.store_ImgBtn);
 
         logoutbtn.setOnClickListener(this);
         profilebtn.setOnClickListener(this);
         postbtn.setOnClickListener(this);
+        storebtn.setOnClickListener(this);
     }
 
     public void onClick(View view){
@@ -43,6 +47,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if(view == logoutbtn){
             firebaseAuth.signOut();
             Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        if(view == storebtn){
+            Intent intent = new Intent(this, StoreActivity.class);
             startActivity(intent);
         }
     }
