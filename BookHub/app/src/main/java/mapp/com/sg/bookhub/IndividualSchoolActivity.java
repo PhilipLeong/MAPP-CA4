@@ -1,5 +1,6 @@
 package mapp.com.sg.bookhub;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -43,7 +44,7 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
 
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
-
+    private ProgressDialog progessDialog;
 
     private ImageButton backBtn;
 
@@ -51,7 +52,9 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school);
-
+        progessDialog = new ProgressDialog(this);
+        progessDialog.setMessage("Loading books now...");
+        progessDialog.show();
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -73,6 +76,7 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        progessDialog.dismiss();
                         if (task.isSuccessful()) {
                             QuerySnapshot documents = task.getResult();
                             if (documents.size() != 0) {

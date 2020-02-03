@@ -222,6 +222,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                                                       .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                           public void onSuccess(Uri uri) {
                                                               Log.d(TAG, "get uri");
+
                                                               imgs.add(uri.toString());
                                                               if (img2 != null) {
                                                                   upload2(img2);
@@ -347,7 +348,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void makepost() {
-
+        progessDialog.setMessage("Verifying inputs...");
+        progessDialog.show();
         if (img1 != null) {
             upload1(img1);
         } else if (img2 != null) {
@@ -355,6 +357,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         } else if (img3 != null) {
             upload3(img3);
         } else {
+            progessDialog.dismiss();
             showErrorPopup("Please upload at least 1 images.");
             return;
         }
@@ -379,6 +382,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                 radioSelected = (RadioButton) findViewById(radioGroup2.getCheckedRadioButtonId());
                 schoolInput = radioSelected.getText().toString();
             } else {
+                progessDialog.dismiss();
                 showErrorPopup("Please select the school :).");
                 return;
             }
@@ -397,6 +401,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             payments.add(chkpaynow.getText().toString());
         }
         if (payments.size() == 0) {
+            progessDialog.dismiss();
             showErrorPopup("Please check at least one payment method.");
             return;
         }
@@ -413,6 +418,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if (TextUtils.isEmpty(titleInput) || TextUtils.isEmpty(conditionInput) || TextUtils.isEmpty(scheduleInput) || TextUtils.isEmpty(locationInput) || TextUtils.isEmpty(massInput) || TextUtils.isEmpty(priceInput) || TextUtils.isEmpty(isbnInput) || TextUtils.isEmpty(authorInput)) {
+            progessDialog.dismiss();
             showErrorPopup("Please don't leave any field blank.");
             return;
         }
@@ -421,16 +427,18 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             massFinal = Double.parseDouble(massInput);
             priceFinal = Double.parseDouble(priceInput);
         } catch (Exception ex) {
+            progessDialog.dismiss();
             showErrorPopup("Please provide valid Mass / Price input.");
             return;
         }
 
 
+        progessDialog.dismiss();
+        progessDialog.setMessage("Posts in progress...");
+        progessDialog.show();
         //start input into database
         Post newPost = new Post(titleInput, authorInput, isbnInput, conditionInput, massFinal, priceFinal, locationInput, scheduleInput, schoolInput, payments, userId, uris);
 
-        progessDialog.setMessage("Posting in progress...");
-        progessDialog.show();
 
         db.collection("Posts").document().set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -445,6 +453,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error happened in posting", e);
+                        progessDialog.dismiss();
                         showErrorPopup("Post failed! Please Try again.");
                     }
                 });

@@ -2,24 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="161dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="148dp"
-        android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginBottom="0dp"
         android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@color/cardBg">
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="0dp"
+        app:cardBackgroundColor="@color/cardBg"
+        app:contentPadding="5dp"
+        app:contentPaddingLeft="20dp">
 
 
         <ImageView
             android:id="@+id/bookimage_IV"
             android:layout_width="70dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="35dp"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
             android:background="@color/lightBlue"
             app:srcCompat="@drawable/booktest1" />
@@ -28,7 +30,7 @@
             android:id="@+id/booktitle_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="140dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="20dp"
             android:maxWidth="280dp"
             android:text="Book Title"
@@ -39,9 +41,9 @@
             android:id="@+id/isbn_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="140dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="60dp"
-            android:maxWidth="150dp"
+            android:maxWidth="145dp"
             android:text="181118281"
             android:textSize="12sp" />
 
@@ -49,7 +51,7 @@
             android:id="@+id/price_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="140dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="103dp"
             android:text="SGD 18.00"
             android:textColor="@android:color/holo_blue_dark"
@@ -58,10 +60,10 @@
 
         <ImageButton
             android:id="@+id/more_Btn"
-            android:layout_width="45dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="290dp"
-            android:layout_marginTop="103dp"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="108dp"
             android:background="@color/cardBg"
             app:srcCompat="@drawable/morebtn" />
     </androidx.cardview.widget.CardView>
