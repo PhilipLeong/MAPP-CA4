@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="164dp"
+        android:layout_height="174dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="0dp"
+        app:cardBackgroundColor="@color/cardBg">
+
+
+        <ImageView
+            android:id="@+id/bookPreview1_IV"
+            android:layout_width="69dp"
+            android:layout_height="103dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/lightBlue"
+            app:srcCompat="@drawable/booktest1" />
+
+        <TextView
+            android:id="@+id/bookTitle1_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="125dp"
+            android:text="Book Name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bookPrice1_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="150dp"
+            android:text="SGD 00.00" />
+
+        <Button
+            android:id="@+id/editpost_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="140dp"
+            android:background="#00000000"
+            android:text="Edit"
+            android:textColor="@android:color/holo_blue_dark" />
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
