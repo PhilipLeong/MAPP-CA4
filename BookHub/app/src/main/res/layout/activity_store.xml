@@ -1,33 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/pageTitle_TV"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="15dp"
+        android:fontFamily="sans-serif"
         android:text="Store"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:translationY="18dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.gridlayout.widget.GridLayout
-        android:layout_width="match_parent"
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="25dp">
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle_TV">
 
         <Button
             android:id="@+id/soc_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/soclogo"
@@ -37,10 +48,10 @@
 
         <Button
             android:id="@+id/sb_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/sblogo"
@@ -50,9 +61,9 @@
 
         <Button
             android:id="@+id/mae_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/maelogo"
@@ -62,10 +73,10 @@
 
         <Button
             android:id="@+id/cls_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/clslogo"
@@ -75,9 +86,9 @@
 
         <Button
             android:id="@+id/abe_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/abelogo"
@@ -87,10 +98,10 @@
 
         <Button
             android:id="@+id/eee_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/eeelogo"
@@ -100,9 +111,9 @@
 
         <Button
             android:id="@+id/mad_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/madlogo"
@@ -112,10 +123,10 @@
 
         <Button
             android:id="@+id/sma_Btn"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="2dp"
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/smalogo"
@@ -125,5 +136,13 @@
 
     </androidx.gridlayout.widget.GridLayout>
 
-    <include layout="@layout/bottommenu" />
-</LinearLayout>
+
+    <include
+        layout="@layout/bottommenu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

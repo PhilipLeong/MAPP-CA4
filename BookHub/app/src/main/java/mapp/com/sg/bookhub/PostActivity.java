@@ -363,6 +363,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
     private void posttodb(List<String> uris) {
 
+        Log.d(TAG, "CAN START POST");
         Double massFinal = 0.0;
         Double priceFinal = 0.0;
         String schoolInput;

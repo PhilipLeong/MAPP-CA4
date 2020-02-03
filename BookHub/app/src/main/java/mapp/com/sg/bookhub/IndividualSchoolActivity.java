@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +30,7 @@ import java.util.List;
 import mapp.com.sg.bookhub.Models.Post;
 import mapp.com.sg.bookhub.storeui.MyAdapter;
 
-public class IndividualSchoolActivity extends AppCompatActivity {
+public class IndividualSchoolActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String selectedSchool;
     private final String TAG = "Individual School Store";
@@ -40,6 +43,9 @@ public class IndividualSchoolActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
+
+
+    private ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +75,8 @@ public class IndividualSchoolActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             QuerySnapshot documents = task.getResult();
-                            if (documents != null) {
+                            if (documents.size() != 0) {
+
                                 for (QueryDocumentSnapshot document : documents) {
                                     Log.d("here!", document.getId());
                                     Post p = document.toObject(Post.class);
@@ -78,16 +85,35 @@ public class IndividualSchoolActivity extends AppCompatActivity {
                                     startRecycleView(posts);
                                 }
                             }
+                            else{
+                                Log.d(TAG,"No book in this store.");
+                                noBookImageView();
+                            }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+        backBtn = (ImageButton) findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(this);
     }
 
     private void startRecycleView (List<Post> posts){
         adapter = new MyAdapter(posts, this);
         recyclerView.setAdapter(adapter);
+    }
+
+
+    private void noBookImageView (){
+        Log.d(TAG,"No book in this store.");
+        ImageView nobookIV = new ImageView(this);
+        nobookIV.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        nobookIV.setImageResource(R.drawable.nobook);
+
+        recyclerView.addView(nobookIV);
     }
 
     private void setHeader (){
@@ -129,5 +155,13 @@ public class IndividualSchoolActivity extends AppCompatActivity {
         }
         pageHeader.setText(header);
         
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == backBtn) {
+            Intent intent = new Intent(this, StoreActivity.class);
+            startActivity(intent);
+        }
     }
 }

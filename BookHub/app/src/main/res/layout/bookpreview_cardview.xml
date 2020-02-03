@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="161dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="148dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
@@ -62,7 +62,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="290dp"
             android:layout_marginTop="103dp"
-            android:background="@android:color/white"
+            android:background="@color/cardBg"
             app:srcCompat="@drawable/morebtn" />
     </androidx.cardview.widget.CardView>
 

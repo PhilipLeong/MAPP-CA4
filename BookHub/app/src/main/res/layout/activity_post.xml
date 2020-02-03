@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/topbar" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/topbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,8 +146,8 @@
                 android:id="@+id/rbGrp1"
                 android:layout_width="370dp"
                 android:layout_height="35dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:orientation="horizontal">
 
 
@@ -168,47 +175,44 @@
                     android:id="@+id/mae_RadioBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="4dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginStart="40dp"
+                    android:layout_marginTop="4dp"
                     android:text="MAE" />
-
 
 
                 <RadioButton
                     android:id="@+id/cls_RadioBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="4dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginStart="40dp"
+                    android:layout_marginTop="4dp"
                     android:text="CLS" />
 
 
             </RadioGroup>>
 
 
-
-
             <RadioGroup
                 android:id="@+id/rbGrp2"
                 android:layout_width="370dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="18dp"
                 android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/eee_RadioBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="4dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginStart="2dp"
+                    android:layout_marginTop="4dp"
                     android:text="EEE" />
 
                 <RadioButton
@@ -221,25 +225,25 @@
                     android:layout_marginTop="4dp"
                     android:text="ABE" />
 
-                    <RadioButton
-                        android:id="@+id/sma_RadioBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginStart="32dp"
-                        android:text="SMA" />
+                <RadioButton
+                    android:id="@+id/sma_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:text="SMA" />
 
-                    <RadioButton
-                        android:id="@+id/mad_RadioBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginStart="40dp"
-                        android:text="MAD" />
+                <RadioButton
+                    android:id="@+id/mad_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="4dp"
+                    android:text="MAD" />
 
 
             </RadioGroup>
@@ -361,4 +365,4 @@
         </LinearLayout>
 
     </ScrollView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

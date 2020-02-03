@@ -55,7 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         holder.isbnTV.setText(postItem.getIsbn());
 
         String price = df2.format(postItem.getPrice());
-        holder.priceTV.setText("SGD: " + price);
+        holder.priceTV.setText("SGD " + price);
         //holder.titleTV.setText(postItem.getTitle());
         holder.morebtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
