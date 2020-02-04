@@ -57,7 +57,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     private ImageButton cross;
     private FirebaseFirestore db;
     int TAKE_IMAGE_CODE =  10001;
-    public static final String TAG = "YOUR-TAG-NAME";
+    public static final String TAG = "Sign up";
+    private Bitmap picture;
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -122,6 +123,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
                             User user = new User(account, schoolcourse, bio);
                             String id = task.getResult().getUser().getUid();
                             db.collection("users").document(id).set(user);
+                            if(picture != null)
+                            handleUpload(picture);
                             startActivity(new Intent(getContext(), MainActivity.class));
                         }
                         else{
@@ -146,9 +149,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
                 case Activity.RESULT_OK:
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     profilePic.setImageBitmap(bitmap);
-                    handleUpload(bitmap);
+                    setBitmap(bitmap);
             }
         }
+    }
+
+    private void setBitmap(Bitmap bitmap){
+        picture = bitmap;
     }
 
     private void handleUpload(Bitmap bitmap){
