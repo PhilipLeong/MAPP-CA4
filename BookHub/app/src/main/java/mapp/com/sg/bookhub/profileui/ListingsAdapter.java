@@ -29,6 +29,7 @@ public class ListingsAdapter extends BaseAdapter {
 
     private List<Post> postItems;
     private Context context;
+
     private static DecimalFormat df2 = new DecimalFormat("##.00");
 
     public ListingsAdapter(List<Post> posts, Context context){
@@ -72,7 +73,7 @@ public class ListingsAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Log.d("Edit Details click:", postItem.getTitle());
                 Intent intent = new Intent(context, EditActivity.class);
-                intent.putExtra("LISTING", postItem);
+                intent.putExtra("LISTING", postItem.getKey());
                 context.startActivity(intent);
             }
         });

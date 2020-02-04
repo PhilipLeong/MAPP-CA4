@@ -1,6 +1,5 @@
 package mapp.com.sg.bookhub.Models;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
@@ -51,6 +50,7 @@ public class Post implements Serializable {
         this.payments = payments;
         this.createdBy = createdBy;
         this.imgs = imgs;
+        this.key = null;
     }
 
 

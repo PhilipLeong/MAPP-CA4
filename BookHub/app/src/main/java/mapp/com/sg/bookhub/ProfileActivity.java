@@ -1,11 +1,14 @@
 package mapp.com.sg.bookhub;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import mapp.com.sg.bookhub.Models.User;
 import mapp.com.sg.bookhub.profileui.SectionsPagerAdapter;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "My Profile";
     private TextView email;
@@ -41,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity {
     private String userId;
     private FirebaseUser currentUser;
     private Button profileBtn;
+    private Button storeBtn;
+    private ImageButton postBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,11 @@ public class ProfileActivity extends AppCompatActivity {
         schoolcourse = (TextView) findViewById(R.id.mycourse_TV);
         profilepic = (CircleImageView) findViewById(R.id.userImage_IV);
         profileBtn = (Button) findViewById(R.id.profile_Btn);
+        storeBtn = (Button) findViewById(R.id.store_Btn);
+        postBtn = (ImageButton) findViewById(R.id.post_Btn);
+
+        storeBtn.setOnClickListener(this);
+        postBtn.setOnClickListener(this);
 
         Drawable active = ResourcesCompat.getDrawable(ProfileActivity.this.getResources(), R.drawable.profile_icon_active, null);
         profileBtn.setCompoundDrawablesWithIntrinsicBounds(null, active,null,null);
@@ -95,6 +105,17 @@ public class ProfileActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void onClick(View v){
+        if(v == postBtn){
+            Intent intent = new Intent(this, PostActivity.class);
+            startActivity(intent);
+        }
+        if(v == storeBtn){
+            Intent intent = new Intent(this, StoreActivity.class);
+            startActivity(intent);
+        }
     }
 
 }

@@ -50,7 +50,7 @@ public class ListingsFragment extends Fragment {
         posts = new ArrayList<Post>();
         Log.d("Testing",userid);
         db.collection("Posts")
-                .whereEqualTo("createdBy", "5KjYdlC58WQnQVX8dhRahmgQlYJ3")
+                .whereEqualTo("createdBy", userid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

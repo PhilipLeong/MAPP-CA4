@@ -12,7 +12,8 @@
         android:id="@+id/listings_GridView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
+        android:scrollbarThumbVertical="@null"
+        android:overScrollMode="never"
         android:layout_marginStart="30dp"
         android:numColumns="2"
         app:layout_constraintEnd_toEndOf="parent"
