@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,10 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
     private Button eeeBtn;
     private Button madBtn;
     private Button smaBtn;
+
+    private Button profileBtn;
+    private Button storeBtn;
+    private ImageButton postBtn;
 
 
     @Override
@@ -47,14 +52,39 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
 
         smaBtn = (Button) findViewById(R.id.sma_Btn);
         smaBtn.setOnClickListener(this);
+
+
+        profileBtn = (Button) findViewById(R.id.profile_Btn);
+        storeBtn = (Button) findViewById(R.id.store_Btn);
+        postBtn = (ImageButton) findViewById(R.id.post_Btn);
+
+        storeBtn.setOnClickListener(this);
+        postBtn.setOnClickListener(this);
+        profileBtn.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
-        String school = ((Button) v).getText().toString();
-        Log.d("Store page click:", school);
-        Intent intent = new Intent(this, IndividualSchoolActivity.class);
-        intent.putExtra("SCHOOL", school);
-        startActivity(intent);
+
+        if(v == postBtn){
+            Intent intent = new Intent(this, PostActivity.class);
+            startActivity(intent);
+        }
+        else if(v == storeBtn){
+            Intent intent = new Intent(this, StoreActivity.class);
+            startActivity(intent);
+        }
+        else if(v == profileBtn){
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        }
+        else{
+            String school = ((Button) v).getText().toString();
+            Log.d("Store page click:", school);
+            Intent intent = new Intent(this, IndividualSchoolActivity.class);
+            intent.putExtra("SCHOOL", school);
+            startActivity(intent);
+        }
     }
 }

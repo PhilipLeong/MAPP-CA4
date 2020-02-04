@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,6 +49,11 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
 
     private ImageButton backBtn;
 
+    private Button profileBtn;
+    private Button storeBtn;
+    private ImageButton postBtn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,15 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
         progessDialog.show();
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+
+
+        profileBtn = (Button) findViewById(R.id.profile_Btn);
+        storeBtn = (Button) findViewById(R.id.store_Btn);
+        postBtn = (ImageButton) findViewById(R.id.post_Btn);
+
+        storeBtn.setOnClickListener(this);
+        postBtn.setOnClickListener(this);
+        profileBtn.setOnClickListener(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recylerView);
         recyclerView.setHasFixedSize(true);
@@ -165,6 +180,18 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         if (v == backBtn) {
             Intent intent = new Intent(this, StoreActivity.class);
+            startActivity(intent);
+        }
+        if(v == postBtn){
+            Intent intent = new Intent(this, PostActivity.class);
+            startActivity(intent);
+        }
+        if(v == storeBtn){
+            Intent intent = new Intent(this, StoreActivity.class);
+            startActivity(intent);
+        }
+        if(v == profileBtn){
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
     }
