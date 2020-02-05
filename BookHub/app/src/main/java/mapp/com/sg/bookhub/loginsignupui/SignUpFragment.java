@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +40,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mapp.com.sg.bookhub.MainActivity;
@@ -52,11 +55,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     private EditText editTextAccount;
     private EditText editTextSchoolCourse;
     private EditText editTextBio;
+
+    private TextView uploadtxt;
+
     private CircleImageView profilePic;
     private Dialog errorDialog;
     private ImageButton cross;
     private FirebaseFirestore db;
     int TAKE_IMAGE_CODE =  10001;
+    private static final int IMAGE_PICK_CODE = 1000;
+    private static final int PERMISSION_CODE = 1001;
     public static final String TAG = "Sign up";
     private Bitmap picture;
 
@@ -72,6 +80,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         View rootView =  inflater.inflate(R.layout.signupfragment, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        uploadtxt = (TextView) rootView.findViewById(R.id.uploadtext);
         editTextEmail = (EditText) rootView.findViewById(R.id.email_input);
         editTextPassword = (EditText) rootView.findViewById(R.id.password_input);
         editTextAccount = (EditText) rootView.findViewById(R.id.account_input);
@@ -85,6 +94,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
 
         progessDialog = new ProgressDialog(getContext());
 
+        uploadtxt.setOnClickListener(this);
         cross.setOnClickListener(this);
         registerButton.setOnClickListener(this);
         profilePic.setOnClickListener(this);
@@ -151,6 +161,16 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
                     profilePic.setImageBitmap(bitmap);
                     setBitmap(bitmap);
             }
+        }
+        if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            setBitmap(bitmap);
+            profilePic.setImageURI(data.getData());
         }
     }
 
@@ -220,6 +240,20 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         errorDialog.show();
     }
+
+    private void startGallery(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                pickImageFromGallery();
+        }
+    }
+
+    private void pickImageFromGallery(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE);
+    }
+
+
     @Override
     public void onClick(View view){
         if(view == registerButton){
@@ -230,6 +264,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         }
         if(view == cross){
             errorDialog.dismiss();
+        }
+        if(view == uploadtxt){
+            startGallery();
         }
     }
 }

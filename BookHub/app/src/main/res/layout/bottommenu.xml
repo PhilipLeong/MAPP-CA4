@@ -10,9 +10,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="67dp"
-        android:layout_marginBottom="6dp"
+        android:layout_width="409dp"
+        android:layout_height="73dp"
         android:background="@drawable/bottom"
         android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"

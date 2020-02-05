@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:overScrollMode="never"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 <LinearLayout
@@ -22,11 +23,13 @@
         android:src="@drawable/add_icon" />
 
     <TextView
+        android:id="@+id/uploadtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="5dp"
         android:text="Upload profile picture"
+        android:clickable="true"
         android:textAlignment="center"
         android:textColor="#5C99E4"
         android:textSize="14sp"
