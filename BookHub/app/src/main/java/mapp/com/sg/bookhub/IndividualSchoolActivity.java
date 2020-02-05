@@ -3,7 +3,6 @@ package mapp.com.sg.bookhub;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mapp.com.sg.bookhub.Models.Post;
-import mapp.com.sg.bookhub.storeui.MyAdapter;
+import mapp.com.sg.bookhub.storeui.BookPreviewAdapter;
 
 public class IndividualSchoolActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,6 +50,8 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
     private Button storeBtn;
     private ImageButton postBtn;
 
+    private ImageView nobookImage;
+    private TextView nobookText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +63,8 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        nobookImage = (ImageView) findViewById(R.id.nobook_IV);
+        nobookText = (TextView) findViewById(R.id.nobook_TV);
 
         profileBtn = (Button) findViewById(R.id.profile_Btn);
         storeBtn = (Button) findViewById(R.id.store_Btn);
@@ -91,11 +92,12 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        progessDialog.dismiss();
                         if (task.isSuccessful()) {
                             QuerySnapshot documents = task.getResult();
                             if (documents.size() != 0) {
-
+                                nobookImage.setVisibility(View.GONE);
+                                nobookText.setVisibility(View.GONE);
+                                progessDialog.dismiss();
                                 for (QueryDocumentSnapshot document : documents) {
                                     Log.d("here!", document.getId());
                                     Post p = document.toObject(Post.class);
@@ -105,8 +107,9 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
                                 }
                             }
                             else{
+                                recyclerView.setVisibility(View.GONE);
+                                progessDialog.dismiss();
                                 Log.d(TAG,"No book in this store.");
-                                noBookImageView();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -119,21 +122,10 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
     }
 
     private void startRecycleView (List<Post> posts){
-        adapter = new MyAdapter(posts, this);
+        adapter = new BookPreviewAdapter(posts, this);
         recyclerView.setAdapter(adapter);
     }
 
-
-    private void noBookImageView (){
-        Log.d(TAG,"No book in this store.");
-        ImageView nobookIV = new ImageView(this);
-        nobookIV.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
-        nobookIV.setImageResource(R.drawable.nobook);
-
-        recyclerView.addView(nobookIV);
-    }
 
     private void setHeader (){
         String header;

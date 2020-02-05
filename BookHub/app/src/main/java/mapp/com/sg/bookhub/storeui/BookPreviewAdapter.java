@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -24,18 +22,17 @@ import com.google.firebase.storage.StorageReference;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import mapp.com.sg.bookhub.BookDetails;
-import mapp.com.sg.bookhub.IndividualSchoolActivity;
+import mapp.com.sg.bookhub.BookDetailsActivity;
 import mapp.com.sg.bookhub.Models.Post;
 import mapp.com.sg.bookhub.R;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
+public class BookPreviewAdapter extends RecyclerView.Adapter<BookPreviewAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Post> postItems;
     private Context context;
     private static DecimalFormat df2 = new DecimalFormat("##.00");
 
-    public MyAdapter(List<Post> posts, Context context){
+    public BookPreviewAdapter(List<Post> posts, Context context){
         this.postItems = posts;
         this.context = context;
     }
@@ -59,8 +56,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         //holder.titleTV.setText(postItem.getTitle());
         holder.morebtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("Store page click:", postItem.getTitle());
-                Intent intent = new Intent(context, BookDetails.class);
+                Log.d("!!Store page click:", postItem.getTitle());
+                Intent intent = new Intent(context, BookDetailsActivity.class);
                 intent.putExtra("BOOK", postItem);
                 context.startActivity(intent);
             }

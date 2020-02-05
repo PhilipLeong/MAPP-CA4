@@ -60,10 +60,10 @@
 
         <ImageButton
             android:id="@+id/more_Btn"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="108dp"
+            android:layout_width="78dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="92dp"
             android:background="@color/cardBg"
             app:srcCompat="@drawable/morebtn" />
     </androidx.cardview.widget.CardView>

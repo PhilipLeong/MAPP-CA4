@@ -15,6 +15,25 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
 
+    <ImageView
+        android:id="@+id/nobook_IV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include4"
+        app:srcCompat="@drawable/nobook" />
+
+    <TextView
+        android:id="@+id/nobook_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sorry, there is no book published in this school yet."
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/include4"
+        app:layout_constraintStart_toStartOf="@+id/include4"
+        app:layout_constraintTop_toBottomOf="@+id/nobook_IV" />
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -29,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recylerView"
