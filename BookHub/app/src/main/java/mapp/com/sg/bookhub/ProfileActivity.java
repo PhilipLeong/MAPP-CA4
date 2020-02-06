@@ -46,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button profileBtn;
     private Button storeBtn;
     private ImageButton postBtn;
+    private ImageButton aboutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileBtn = (Button) findViewById(R.id.profile_Btn);
         storeBtn = (Button) findViewById(R.id.store_Btn);
         postBtn = (ImageButton) findViewById(R.id.post_Btn);
+        aboutBtn = (ImageButton) findViewById(R.id.about_btn);
 
+        aboutBtn.setOnClickListener(this);
         storeBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
 
@@ -114,6 +117,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
         if(v == storeBtn){
             Intent intent = new Intent(this, StoreActivity.class);
+            startActivity(intent);
+        }
+
+        if(v == aboutBtn){
+            Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
     }
