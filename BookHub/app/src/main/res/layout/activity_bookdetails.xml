@@ -19,10 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/include3"
+        app:layout_constraintBottom_toTopOf="@+id/orderBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include4">
+        app:layout_constraintTop_toBottomOf="@+id/include4"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,63 +41,104 @@
                 android:id="@+id/bookInfo_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BookTitle-ISBN-Author" />
+                android:layout_marginTop="10dp"
+                android:text="BookTitle-ISBN-Author"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/price_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="BookTitle-ISBN-Author"
-                android:textSize="13sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="5dp"/>
 
             <TextView
                 android:id="@+id/description_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@drawable/description"
+                android:drawablePadding="7dp"
+                android:gravity="center_vertical|left"
                 android:text="BookTitle-ISBN-Author"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/mass_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@drawable/scale"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical|left"
                 android:text="BookTitle-ISBN-Author"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
 
             <TextView
                 android:id="@+id/location_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@drawable/placeholder"
+                android:drawablePadding="9dp"
+                android:gravity="center_vertical|left"
                 android:text="BookTitle-ISBN-Author"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
 
             <TextView
                 android:id="@+id/calendar_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@drawable/calendar"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical|left"
                 android:text="BookTitle-ISBN-Author"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/payment_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@drawable/hand"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|left"
                 android:text="BookTitle-ISBN-Author"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="7dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/seller_TV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/seller"
+                    android:drawablePadding="9dp"
+                    android:gravity="center_vertical|left"
                     android:text="BookTitle-ISBN-Author"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -108,8 +151,8 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/include3"
-        android:layout_width="200dp"
+        android:id="@+id/orderBtn"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/loginsignupbutton"

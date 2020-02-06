@@ -1,18 +1,35 @@
 package mapp.com.sg.bookhub;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import mapp.com.sg.bookhub.Models.Order;
 import mapp.com.sg.bookhub.Models.Post;
 import mapp.com.sg.bookhub.storeui.ImageAdapter;
 
@@ -21,6 +38,8 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     private TextView pageHeader;
     private ImageButton backBtn;
     private Post book;
+
+    private ProgressDialog progessDialog;
 
     private String school;
     private String TAG = "BOOK DETAILS";
@@ -36,14 +55,37 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
     private Button orderBtn;
     private ViewPager viewPager;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db;
+    private String userId;
+
+
+    //error pop-up
+    private Dialog errorDialog;
+    private ImageButton errorCross;
+    private TextView errorTV;
+
+    //success pop-up
+    private Dialog successDialog;
+    private ImageButton successCross;
+    private TextView successTV;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookdetails);
 
+
         Intent intent = getIntent();
         book = (Post) intent.getSerializableExtra("BOOK");
         school = book.getSchool();
+
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        userId = currentUser.getUid();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         ImageAdapter adapter = new ImageAdapter(this, book.getImgs());
@@ -82,6 +124,22 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         }
         payment.setText(paymentStr);
 
+        orderBtn = findViewById(R.id.orderBtn);
+        orderBtn.setOnClickListener(this);
+        progessDialog = new ProgressDialog(this);
+
+
+        errorDialog = new Dialog(this);
+        errorDialog.setContentView(R.layout.errorpopup);
+        errorCross = errorDialog.findViewById(R.id.exit_btn);
+        errorCross.setOnClickListener(this);
+        errorTV = errorDialog.findViewById(R.id.error_TV);
+
+        successDialog = new Dialog(this);
+        successDialog.setContentView(R.layout.successpopup);
+        successCross = successDialog.findViewById(R.id.back_btn);
+        successCross.setOnClickListener(this);
+        successTV = successDialog.findViewById(R.id.success_TV);
     }
 
     @Override
@@ -91,5 +149,46 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("SCHOOL", school);
             startActivity(intent);
         }
+        if (v == orderBtn){
+            progessDialog.setMessage("Placing your order...");
+            progessDialog.show();
+            createOrder();
+        }
+    }
+
+    private void createOrder(){
+        Date currentTime = Calendar.getInstance().getTime();
+
+        Order newOrder = new Order(book.getKey(),userId,currentTime.toString());
+        db.collection("Orders").document().set(newOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                progessDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "You have made a post! ", Toast.LENGTH_SHORT);
+                Log.d(TAG, "Place an order successfully!");
+                showSuccessPopup("You have placed the order!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error happened in ordering", e);
+                        progessDialog.dismiss();
+                        showErrorPopup("Failed to place order! Please Try again.");
+                    }
+                });
+
+    }
+
+    private void showErrorPopup(String errorMessage) {
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        errorTV.setText(errorMessage);
+        errorDialog.show();
+    }
+
+    private void showSuccessPopup(String successMessage) {
+        successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        successTV.setText(successMessage);
+        successDialog.show();
     }
 }
