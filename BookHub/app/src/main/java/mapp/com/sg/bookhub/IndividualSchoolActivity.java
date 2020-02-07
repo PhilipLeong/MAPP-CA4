@@ -88,6 +88,7 @@ public class IndividualSchoolActivity extends AppCompatActivity implements View.
 
         db.collection("Posts")
                 .whereEqualTo("school", selectedSchool)
+                .whereEqualTo("hasBeenBought", false)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

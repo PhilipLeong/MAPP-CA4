@@ -50,12 +50,26 @@
                 android:id="@+id/price_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="BookTitle-ISBN-Author"
                 android:textSize="16sp"
-                android:layout_marginTop="5dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/description_TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="18dp"
+                android:drawableLeft="@drawable/description"
+                android:drawablePadding="7dp"
+                android:gravity="center_vertical|left"
+                android:text="BookTitle-ISBN-Author"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/publishTime_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

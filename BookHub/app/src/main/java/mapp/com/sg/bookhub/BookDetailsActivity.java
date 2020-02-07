@@ -47,6 +47,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     private TextView title;
     private TextView price;
     private TextView seller;
+    private TextView publish;
     private TextView condition;
     private TextView mass;
     private TextView schedule;
@@ -108,9 +109,11 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         schedule = findViewById(R.id.calendar_TV);
         location = findViewById(R.id.location_TV);
         payment = findViewById(R.id.payment_TV);
+        publish = findViewById(R.id.publishTime_TV);
 
         title.setText(book.getTitle() + " - " + book.getIsbn() + " - " + book.getAuthor());
-        price.setText(book.getPrice().toString());
+        price.setText("SGD " + book.getPrice().toString());
+        publish.setText(book.getCreatedAt());
         condition.setText(book.getCondition());
         mass.setText(book.getMass().toString());
         schedule.setText(book.getSchedule());
@@ -140,6 +143,11 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         successCross = successDialog.findViewById(R.id.back_btn);
         successCross.setOnClickListener(this);
         successTV = successDialog.findViewById(R.id.success_TV);
+
+        boolean canbuy = isMyBook();
+        if(!canbuy){
+            orderBtn.setEnabled(false);
+        }
     }
 
     @Override
@@ -163,6 +171,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         db.collection("Orders").document().set(newOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                updatePost();
                 progessDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "You have made a post! ", Toast.LENGTH_SHORT);
                 Log.d(TAG, "Place an order successfully!");
@@ -175,6 +184,22 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                         Log.w(TAG, "Error happened in ordering", e);
                         progessDialog.dismiss();
                         showErrorPopup("Failed to place order! Please Try again.");
+                    }
+                });
+    }
+
+    private void updatePost(){
+        book.setHasBeenBought(true);
+        db.collection("Posts").document(book.getKey()).set(book).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Updated a post to been bought!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error happened in updating", e);
                     }
                 });
 
@@ -191,4 +216,13 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         successTV.setText(successMessage);
         successDialog.show();
     }
+
+    private boolean isMyBook(){
+        String bookCreatedBy = book.getCreatedBy();
+        if(bookCreatedBy.equals(userId)){
+            return true;
+        }
+        return false;
+    }
+
 }

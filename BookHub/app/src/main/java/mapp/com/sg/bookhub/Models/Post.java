@@ -6,7 +6,61 @@ import java.util.List;
 public class Post implements Serializable {
 
     private String title;
+    private String author;
+    private String isbn;
+    private String condition;
+    private Double mass;
+    private Double price;
+    private String location;
+    private String schedule;
+    private String school;
+    private List<String> payments;
+    private String createdBy;
+    private List<String> imgs;
 
+    private Boolean hasBeenBought;
+    private String createdAt;
+
+
+    public Post(String title, String author, String isbn, String condition, Double mass, Double price, String location, String schedule, String school, List<String> payments, String createdBy, List<String> imgs, Boolean hasBeenBought, String createdAt) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.condition = condition;
+        this.mass = mass;
+        this.price = price;
+        this.location = location;
+        this.schedule = schedule;
+        this.school = school;
+        this.payments = payments;
+        this.createdBy = createdBy;
+        this.imgs = imgs;
+        this.hasBeenBought = hasBeenBought;
+        this.createdAt = createdAt;
+        this.key = key;
+    }
+
+
+
+    public Post(){}
+
+    public Boolean getHasBeenBought() {
+        return hasBeenBought;
+    }
+
+    public void setHasBeenBought(Boolean hasBeenBought) {
+        this.hasBeenBought = hasBeenBought;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    private String key;
     public String getAuthor() {
         return author;
     }
@@ -22,41 +76,6 @@ public class Post implements Serializable {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-
-    private String author;
-    private String isbn;
-    private String condition;
-    private Double mass;
-    private Double price;
-    private String location;
-    private String schedule;
-    private String school;
-    private List<String> payments;
-    private String createdBy;
-    private List<String> imgs;
-
-    private String key;
-
-    public Post(String title, String author, String isbn, String condition, Double mass, Double price, String location, String schedule, String school, List<String> payments, String createdBy, List<String> imgs) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.condition = condition;
-        this.mass = mass;
-        this.price = price;
-        this.location = location;
-        this.schedule = schedule;
-        this.school = school;
-        this.payments = payments;
-        this.createdBy = createdBy;
-        this.imgs = imgs;
-        this.key = null;
-    }
-
-
-
-    public Post(){}
-
 
     public String getKey() {
         return key;

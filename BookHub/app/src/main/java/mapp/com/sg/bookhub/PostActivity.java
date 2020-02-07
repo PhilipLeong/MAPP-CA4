@@ -39,6 +39,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import mapp.com.sg.bookhub.Models.Post;
@@ -433,11 +435,15 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+
+        Date currentTime = Calendar.getInstance().getTime();
+        String current = currentTime.toString();
+
         progessDialog.dismiss();
         progessDialog.setMessage("Posts in progress...");
         progessDialog.show();
         //start input into database
-        Post newPost = new Post(titleInput, authorInput, isbnInput, conditionInput, massFinal, priceFinal, locationInput, scheduleInput, schoolInput, payments, userId, uris);
+        Post newPost = new Post(titleInput, authorInput, isbnInput, conditionInput, massFinal, priceFinal, locationInput, scheduleInput, schoolInput, payments, userId, uris, false, current);
 
 
         db.collection("Posts").document().set(newPost).addOnSuccessListener(new OnSuccessListener<Void>() {
