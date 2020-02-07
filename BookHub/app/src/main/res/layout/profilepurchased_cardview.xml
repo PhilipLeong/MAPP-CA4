@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="161dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="148dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="0dp"
+        app:cardBackgroundColor="@color/cardBg"
+        app:contentPadding="5dp"
+        app:contentPaddingLeft="20dp">
+
+
+        <ImageView
+            android:id="@+id/bookimage_IV"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/lightBlue"
+            app:srcCompat="@drawable/booktest1" />
+
+        <TextView
+            android:id="@+id/booktitle_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:maxWidth="280dp"
+            android:text="Book Title"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/isbn_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="60dp"
+            android:maxWidth="145dp"
+            android:text="181118281"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/price_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="103dp"
+            android:text="SGD 18.00"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/more_Btn"
+            android:layout_width="78dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="92dp"
+            android:background="@color/cardBg"
+            app:srcCompat="@drawable/morebtn" />
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
