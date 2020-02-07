@@ -52,6 +52,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private TextView pageTitle;
     private ImageButton backBtn;
     private Button submitBtn;
+    private Button deleteBtn;
 
     //error pop-up
     private Dialog errorDialog;
@@ -132,6 +133,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         backBtn.setOnClickListener(this);
 
         submitBtn = (Button) findViewById(R.id.submit_Btn);
+        deleteBtn = (Button) findViewById(R.id.delete_Btn);
+        deleteBtn.setOnClickListener(this);
         submitBtn.setOnClickListener(this);
 
         title = (EditText) findViewById(R.id.book_Input);
@@ -486,12 +489,40 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         if (view == errorCross) {
             errorDialog.dismiss();
         }
+
+        if(view == deleteBtn){
+            deleteListing();
+        }
+    }
+
+    private void deleteListing(){
+        db.collection("Posts").document(listingid)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                        Toast.makeText(getApplicationContext(), "You have deleted a post! ", Toast.LENGTH_SHORT);
+                        showSuccessPopup("You have deleted a post!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
     }
 
 
     private void updatepost() {
         progessDialog.setMessage("Verifying inputs...");
         progessDialog.show();
+        if(title.getText() == null || isbn.getText() == null || condition.getText() == null || mass.getText() == null || price.getText() == null || location.getText() == null || schedule.getText() == null || author.getText() == null){
+            progessDialog.dismiss();
+            showErrorPopup("Please enter valid details.");
+            return;
+        }
         if (img1 != null) {
             upload1(img1);
         } else if (img2 != null) {

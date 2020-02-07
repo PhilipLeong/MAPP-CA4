@@ -84,7 +84,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             startActivity(intent);
                         }
                         else{
-                            Toast.makeText(getContext(), "Unsuccessful, please try again", Toast.LENGTH_SHORT).show();
+                            showPopup();
                         }
                     }
                 });
