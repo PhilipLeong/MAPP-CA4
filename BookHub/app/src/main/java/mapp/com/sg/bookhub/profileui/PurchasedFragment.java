@@ -75,6 +75,9 @@ public class PurchasedFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        nobookImage = (ImageView) rootView.findViewById(R.id.nobook_IV);
+        nobookText = (TextView) rootView.findViewById(R.id.nobook_TV);
+
         pageHeader = (TextView)rootView.findViewById(R.id.pageTitle_TV);
         posts = new ArrayList<Post>();
 
@@ -90,6 +93,8 @@ public class PurchasedFragment extends Fragment {
                             QuerySnapshot documents = task.getResult();
                             Log.d("Documents", ""+documents.size());
                             if (documents.size() != 0) {
+                                nobookImage.setVisibility(View.GONE);
+                                nobookText.setVisibility(View.GONE);
                                 for (QueryDocumentSnapshot document : documents) {
                                     String order = document.getData().get("postId").toString();
                                     Log.d("Order: ",order);

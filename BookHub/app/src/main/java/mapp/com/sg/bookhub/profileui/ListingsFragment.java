@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +37,8 @@ public class ListingsFragment extends Fragment {
     private String userid;
     private ListingsAdapter adapter;
     private final String TAG = "Listings";
+    private ImageView nobookImage;
+    private TextView nobookText;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.listingsfragment, container, false);
@@ -45,6 +49,10 @@ public class ListingsFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         userid = firebaseAuth.getCurrentUser().getUid();
+
+        nobookImage = (ImageView) rootView.findViewById(R.id.nobook_IV);
+        nobookText = (TextView) rootView.findViewById(R.id.nobook_TV);
+
 
         gridview = (GridView) rootView.findViewById(R.id.listings_GridView);
         posts = new ArrayList<Post>();
@@ -59,7 +67,9 @@ public class ListingsFragment extends Fragment {
                         if (task.isSuccessful()) {
                             QuerySnapshot documents = task.getResult();
                             if (documents.size() != 0) {
-
+                                nobookImage.setVisibility(View.GONE);
+                                nobookText.setVisibility(View.GONE);
+                                progessDialog.dismiss();
                                 for (QueryDocumentSnapshot document : documents) {
                                     Log.d("here!", document.getId());
                                     Post p = document.toObject(Post.class);
@@ -69,6 +79,8 @@ public class ListingsFragment extends Fragment {
                                 }
                             }
                         } else {
+                            gridview.setVisibility(View.GONE);
+                            progessDialog.dismiss();
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
