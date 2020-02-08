@@ -38,6 +38,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -436,8 +437,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date currentTime = Calendar.getInstance().getTime();
-        String current = currentTime.toString();
+        String current = df.format(currentTime.getTime());
+
 
         progessDialog.dismiss();
         progessDialog.setMessage("Posts in progress...");

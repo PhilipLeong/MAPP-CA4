@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,20 +18,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import mapp.com.sg.bookhub.Models.Order;
 import mapp.com.sg.bookhub.Models.Post;
+import mapp.com.sg.bookhub.Models.User;
 import mapp.com.sg.bookhub.storeui.ImageAdapter;
 
 public class BookDetailsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -46,13 +55,14 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
     private TextView title;
     private TextView price;
-    private TextView seller;
     private TextView publish;
     private TextView condition;
     private TextView mass;
     private TextView schedule;
     private TextView location;
     private TextView payment;
+    private TextView sellerName;
+    private ImageButton sellerProfile;
 
     private Button orderBtn;
     private ViewPager viewPager;
@@ -61,6 +71,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     private FirebaseFirestore db;
     private String userId;
 
+    private User seller;
 
     //error pop-up
     private Dialog errorDialog;
@@ -88,18 +99,18 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         userId = currentUser.getUid();
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         ImageAdapter adapter = new ImageAdapter(this, book.getImgs());
         viewPager.setAdapter(adapter);
 
 
-        pageHeader = (TextView)findViewById(R.id.pageTitle_TV);
+        pageHeader = findViewById(R.id.pageTitle_TV);
         pageHeader.setText("Book Details");
 
 
         Log.d(TAG, book.getTitle());
 
-        backBtn = (ImageButton) findViewById(R.id.back_btn);
+        backBtn = findViewById(R.id.back_btn);
         backBtn.setOnClickListener(this);
 
         title = findViewById(R.id.bookInfo_TV);
@@ -110,18 +121,21 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         location = findViewById(R.id.location_TV);
         payment = findViewById(R.id.payment_TV);
         publish = findViewById(R.id.publishTime_TV);
+        sellerName = findViewById(R.id.seller_TV);
+        sellerProfile = findViewById(R.id.seller_profile);
 
         title.setText(book.getTitle() + " - " + book.getIsbn() + " - " + book.getAuthor());
         price.setText("SGD " + book.getPrice().toString());
         publish.setText(book.getCreatedAt());
         condition.setText(book.getCondition());
-        mass.setText(book.getMass().toString());
+        mass.setText(book.getMass().toString() + " kg");
         schedule.setText(book.getSchedule());
+        location.setText(book.getLocation());
         List<String> payments = book.getPayments();
         String paymentStr = "";
-        for (int i = 0; i < payments.size(); i++){
+        for (int i = 0; i < payments.size(); i++) {
             paymentStr += payments.get(i);
-            if(i != (payments.size() - 1)){
+            if (i != (payments.size() - 1)) {
                 paymentStr += ", ";
             }
         }
@@ -129,9 +143,38 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
         orderBtn = findViewById(R.id.orderBtn);
         orderBtn.setOnClickListener(this);
+
+
+        DocumentReference docRef = db.collection("users").document(book.getCreatedBy());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        seller = document.toObject(User.class);
+                        if (isMyBook()) {
+                            Log.d(TAG, "This book is published by myself");
+                            sellerName.setText(seller.getAccount() + " (You) ");
+                            sellerProfile.setVisibility(View.GONE);
+                            orderBtn.setVisibility(View.GONE);
+                        }
+                        else if(book.getHasBeenBought()){
+                            orderBtn.setVisibility(View.GONE);
+                        }
+                    } else {
+                        Log.d(TAG, "No such seller");
+                    }
+                } else {
+                    Log.d(TAG, "get seller failed with ", task.getException());
+                }
+            }
+        });
+
+
+
+
         progessDialog = new ProgressDialog(this);
-
-
         errorDialog = new Dialog(this);
         errorDialog.setContentView(R.layout.errorpopup);
         errorCross = errorDialog.findViewById(R.id.exit_btn);
@@ -144,30 +187,27 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         successCross.setOnClickListener(this);
         successTV = successDialog.findViewById(R.id.success_TV);
 
-        boolean canbuy = isMyBook();
-        if(!canbuy){
-            orderBtn.setEnabled(false);
-        }
+
     }
 
     @Override
     public void onClick(View v) {
-        if (v == backBtn){
+        if (v == backBtn) {
             Intent intent = new Intent(this, IndividualSchoolActivity.class);
             intent.putExtra("SCHOOL", school);
             startActivity(intent);
         }
-        if (v == orderBtn){
+        if (v == orderBtn) {
             progessDialog.setMessage("Placing your order...");
             progessDialog.show();
             createOrder();
         }
     }
 
-    private void createOrder(){
+    private void createOrder() {
         Date currentTime = Calendar.getInstance().getTime();
 
-        Order newOrder = new Order(book.getKey(),userId,currentTime.toString());
+        Order newOrder = new Order(book.getKey(), userId, currentTime.toString());
         db.collection("Orders").document().set(newOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -188,7 +228,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                 });
     }
 
-    private void updatePost(){
+    private void updatePost() {
         book.setHasBeenBought(true);
         db.collection("Posts").document(book.getKey()).set(book).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -217,12 +257,10 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         successDialog.show();
     }
 
-    private boolean isMyBook(){
+    private boolean isMyBook() {
         String bookCreatedBy = book.getCreatedBy();
-        if(bookCreatedBy.equals(userId)){
-            return true;
-        }
-        return false;
+        Log.d(TAG, "seller is " + bookCreatedBy);
+        Log.d(TAG, "I'm " + userId);
+        return bookCreatedBy.equals(userId);
     }
-
 }

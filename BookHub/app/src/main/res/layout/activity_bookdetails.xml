@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="BookTitle-ISBN-Author"
+                android:textColor="@color/colorMain"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -75,7 +76,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="18dp"
-                android:drawableLeft="@drawable/description"
+                android:drawableLeft="@drawable/schedule"
                 android:drawablePadding="7dp"
                 android:gravity="center_vertical|left"
                 android:text="BookTitle-ISBN-Author"
@@ -141,11 +142,13 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginBottom="7dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/seller_TV"
-                    android:layout_width="match_parent"
+                    android:layout_width="260dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:drawableLeft="@drawable/seller"
@@ -155,9 +158,13 @@
                     android:textSize="14sp" />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@color/cardBg" />
+                    android:id="@+id/seller_profile"
+                    android:layout_width="44dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@android:color/white"
+                    android:src="@drawable/user" />
             </LinearLayout>
 
 
@@ -169,6 +176,7 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/loginsignupbutton"
         android:text="Order Now"
         android:textColor="#FFFFFF"
