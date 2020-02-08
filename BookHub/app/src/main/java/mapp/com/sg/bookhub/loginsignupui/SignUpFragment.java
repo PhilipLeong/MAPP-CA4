@@ -56,6 +56,12 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     private EditText editTextSchoolCourse;
     private EditText editTextBio;
 
+    private String email;
+    private String account;
+    private String schoolcourse;
+    private String bio;
+    private String[] id;
+
     private TextView uploadtxt;
 
     private CircleImageView profilePic;
@@ -67,6 +73,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     private static final int PERMISSION_CODE = 1001;
     public static final String TAG = "Sign up";
     private Bitmap picture;
+
+    private String profilepicuri;
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -102,11 +110,12 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     }
 
     private void registerUser(){
-        String email = editTextEmail.getText().toString().trim();
+        email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        final String account = editTextAccount.getText().toString().trim();
-        final String schoolcourse = editTextSchoolCourse.getText().toString().trim();
-        final String bio = editTextBio.getText().toString().trim();
+        account = editTextAccount.getText().toString().trim();
+        schoolcourse = editTextSchoolCourse.getText().toString().trim();
+        bio = editTextBio.getText().toString().trim();
+        id = new String[1];
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(account) || TextUtils.isEmpty(schoolcourse) || TextUtils.isEmpty(bio)){
             //Email is empty
@@ -130,12 +139,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
                         progessDialog.dismiss();
                         if(task.isSuccessful()){
                             Toast.makeText(getContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
-                            User user = new User(account, schoolcourse, bio);
-                            String id = task.getResult().getUser().getUid();
-                            db.collection("users").document(id).set(user);
                             if(picture != null)
-                            handleUpload(picture);
-                            startActivity(new Intent(getContext(), MainActivity.class));
+                                handleUpload(picture);
+                            id[0] = task.getResult().getUser().getUid();
                         }
                         else{
                             Toast.makeText(getContext(), "Unsuccessful, please try again", Toast.LENGTH_SHORT).show();
@@ -208,9 +214,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onSuccess(Uri uri) {
                         Log.d(TAG, "onSuccess: "+uri);
+                        profilepicuri = uri.toString();
                         setUserProfileUrl(uri);
+                        uploadUserInformation();
                     }
                 });
+    }
+
+    private void uploadUserInformation(){
+        User user = new User(account, schoolcourse, bio, profilepicuri,email);
+        db.collection("users").document(id[0]).set(user);
+        startActivity(new Intent(getContext(), MainActivity.class));
     }
 
     private void setUserProfileUrl(Uri uri){

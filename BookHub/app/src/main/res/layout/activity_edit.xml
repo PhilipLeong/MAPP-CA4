@@ -66,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add basic details"
+                android:text="@string/details"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Book Title"
+                android:text="@string/title"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="ISBN"
+                android:text="@string/isbn"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Author"
+                android:text="@string/author"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Item Condition"
+                android:text="@string/condition"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="School"
+                android:text="@string/school"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -164,7 +164,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="4dp"
-                    android:text="SOC" />
+                    android:text="@string/radioSOC" />
 
                 <RadioButton
                     android:id="@+id/sb_RadioBtn"
@@ -174,7 +174,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="4dp"
-                    android:text="SB" />
+                    android:text="@string/radioSB" />
 
                 <RadioButton
                     android:id="@+id/mae_RadioBtn"
@@ -184,7 +184,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
-                    android:text="MAE" />
+                    android:text="@string/radioMAE" />
 
 
                 <RadioButton
@@ -195,7 +195,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
-                    android:text="CLS" />
+                    android:text="@string/radioCLS" />
 
 
             </RadioGroup>>
@@ -218,7 +218,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="4dp"
-                    android:text="EEE" />
+                    android:text="@string/radioEEE" />
 
                 <RadioButton
                     android:id="@+id/abe_RadioBtn"
@@ -228,7 +228,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:text="ABE" />
+                    android:text="@string/radioABE" />
 
                 <RadioButton
                     android:id="@+id/sma_RadioBtn"
@@ -238,7 +238,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:text="SMA" />
+                    android:text="@string/radioSMA" />
 
                 <RadioButton
                     android:id="@+id/mad_RadioBtn"
@@ -248,7 +248,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
-                    android:text="MAD" />
+                    android:text="@string/radioMAD" />
 
 
             </RadioGroup>
@@ -259,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Mass (kg)"
+                android:text="@string/mass"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -275,7 +275,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Price (S$)"
+                android:text="@string/price"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -291,7 +291,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Payment"
+                android:text="@string/payment"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -307,21 +307,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="PayNow" />
+                    android:text="@string/checkboxpaynow" />
 
                 <CheckBox
                     android:id="@+id/cash_Chkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cash" />
+                    android:text="@string/checkboxcash" />
 
                 <CheckBox
                     android:id="@+id/paylah_Chkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Paylah" />
+                    android:text="@string/checkboxpaylah" />
             </LinearLayout>
 
             <TextView
@@ -329,7 +329,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Location"
+                android:text="@string/location"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -345,7 +345,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Schedule"
+                android:text="@string/schedule"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -363,10 +363,10 @@
 
     <Button
         android:id="@+id/submit_Btn"
-        android:layout_width="244dp"
-        android:layout_height="27dp"
+        android:layout_width="108dp"
+        android:layout_height="37dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/loginsignupbutton"
         android:text="Submit"
@@ -379,10 +379,10 @@
 
     <Button
         android:id="@+id/delete_Btn"
-        android:layout_width="100dp"
-        android:layout_height="27dp"
+        android:layout_width="109dp"
+        android:layout_height="37dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="290dp"
+        android:layout_marginLeft="230dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/loginsignupbutton"
         android:text="Delete"

@@ -7,5 +7,38 @@
     <string name="slogan">Spend less. Read more.</string>
     <string name="title_activity_profile">Profile</string>
     <string name="app_description">BookHub aims to provide a platform for polytehnic students, especially Singapore Polytechnic students to buy and sell second-hand textbooks</string>
+    <string name="defaulttitle">Page Title</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="bio">Bio</string>
+    <string name="schoolcourse">School / Course</string>
+    <string name="account">Account</string>
+    <string name="uploadimg">Upload Profile Picture</string>
+    <string name="store">Store</string>
+    <string name="profile">Profile</string>
+
+    <string name="details">Add basic details</string>
+    <string name="title">Book Title</string>
+    <string name="isbn">ISBN</string>
+    <string name="author">Author</string>
+    <string name="condition">Item Condition</string>
+    <string name="school">School</string>
+    <string name="radioSOC">SOC</string>
+    <string name="radioSB">SB</string>
+    <string name="radioMAE">MAE</string>
+    <string name="radioEEE">EEE</string>
+    <string name="radioMAD">MAD</string>
+    <string name="radioCLS">CLS</string>
+    <string name="radioSMA">SMA</string>
+    <string name="radioABE">ABE</string>
+    <string name="mass">Mass (kg)</string>
+    <string name="price">Price (S$)</string>
+    <string name="payment">Payment</string>
+    <string name="location">Location</string>
+    <string name="schedule">Schedule</string>
+    <string name="checkboxcash">Cash</string>
+    <string name="checkboxpaylah">PayLah</string>
+    <string name="checkboxpaynow">PayNow</string>
+
 
 </resources>

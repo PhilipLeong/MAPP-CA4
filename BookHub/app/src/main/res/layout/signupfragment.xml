@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="5dp"
-        android:text="Upload profile picture"
+        android:text="@string/uploadimg"
         android:clickable="true"
         android:textAlignment="center"
         android:textColor="#5C99E4"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/account_icon"
         android:drawablePadding="15dp"
-        android:text="Account"
+        android:text="@string/account"
         android:textAlignment="center"
         android:textSize="14sp"
         android:translationX="50dp" />
@@ -66,7 +66,7 @@
         android:layout_marginTop="20dp"
         android:drawableStart="@drawable/email_icon"
         android:drawablePadding="15dp"
-        android:text="Email"
+        android:text="@string/email"
         android:textAlignment="center"
         android:textSize="14sp"
         android:translationX="50dp" />
@@ -86,7 +86,7 @@
         android:layout_marginTop="20dp"
         android:drawableStart="@drawable/pwd_icon"
         android:drawablePadding="15dp"
-        android:text="Password"
+        android:text="@string/password"
         android:textAlignment="center"
         android:textSize="14sp"
         android:translationX="50dp" />
@@ -106,7 +106,7 @@
         android:layout_marginTop="20dp"
         android:drawableStart="@drawable/course_icon"
         android:drawablePadding="15dp"
-        android:text="School / Course"
+        android:text="@string/schoolcourse"
         android:textAlignment="center"
         android:textSize="14sp"
         android:translationX="50dp" />
@@ -125,7 +125,7 @@
         android:layout_marginTop="20dp"
         android:drawableStart="@drawable/bio_icon"
         android:drawablePadding="15dp"
-        android:text="Bio"
+        android:text="@string/bio"
         android:textAlignment="center"
         android:textSize="14sp"
         android:translationX="50dp" />

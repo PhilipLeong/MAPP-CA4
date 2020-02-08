@@ -1,10 +1,8 @@
 package mapp.com.sg.bookhub;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,7 +46,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button profileBtn;
     private Button storeBtn;
     private ImageButton postBtn;
-    private ImageButton aboutBtn;
 
     private TextView pageTitle;
     private ImageButton backHomeBtn;
@@ -67,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         pageTitle = (TextView) findViewById(R.id.pageTitle_TV);
-        pageTitle.setText("My Profile");
+        pageTitle.setText(TAG);
 
         backHomeBtn = (ImageButton) findViewById(R.id.back_btn);
         backHomeBtn.setOnClickListener(this);
@@ -80,14 +77,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileBtn = (Button) findViewById(R.id.profile_Btn);
         storeBtn = (Button) findViewById(R.id.store_Btn);
         postBtn = (ImageButton) findViewById(R.id.post_Btn);
-        aboutBtn = (ImageButton) findViewById(R.id.about_btn);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
         userId = currentUser.getUid();
 
-
-        aboutBtn.setOnClickListener(this);
         storeBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
 
@@ -137,10 +131,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
         }
 
-        if(v == aboutBtn){
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-        }
         if (v == backHomeBtn){
             Intent i = new Intent(this, HomeActivity.class);
             startActivity(i);

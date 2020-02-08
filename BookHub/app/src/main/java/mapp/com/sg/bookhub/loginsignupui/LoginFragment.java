@@ -31,12 +31,18 @@ import mapp.com.sg.bookhub.R;
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private Button signinButton;
+    private ImageButton cross;
+
     private EditText editTextEmail;
     private EditText editTextPassword;
+
     private ProgressDialog progressDialog;
+
     private Dialog errorDialog;
+
     private FirebaseAuth firebaseAuth;
-    private ImageButton cross;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

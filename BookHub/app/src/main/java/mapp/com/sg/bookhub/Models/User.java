@@ -4,15 +4,34 @@ public class User {
     private String account;
     private String schoolcourse;
     private String bio;
+    private String profileimg;
+    private String email;
 
     public User(){}
 
-    public User(String account, String schoolcourse, String bio ){
+    public User(String account, String schoolcourse, String bio, String profileimg, String email ){
         this.account = account;
         this.schoolcourse = schoolcourse;
         this.bio = bio;
+        this.profileimg = profileimg;
+        this.email = email;
     }
 
+    public String getProfileimg(){
+        return this.profileimg;
+    }
+
+    public void setProfileimg(String profileimg){
+        this.profileimg = profileimg;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
     public String getAccount(){
         return this.account;
     }

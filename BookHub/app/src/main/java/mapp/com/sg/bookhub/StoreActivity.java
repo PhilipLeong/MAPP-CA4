@@ -1,6 +1,8 @@
 package mapp.com.sg.bookhub;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 public class StoreActivity extends AppCompatActivity implements View.OnClickListener{
     private Button socBtn;
@@ -68,6 +71,9 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
         postBtn.setOnClickListener(this);
         profileBtn.setOnClickListener(this);
 
+        Drawable active = ResourcesCompat.getDrawable(StoreActivity.this.getResources(), R.drawable.store_icon_active, null);
+        storeBtn.setCompoundDrawablesWithIntrinsicBounds(null, active,null,null);
+        storeBtn.setTextColor(Color.parseColor("#4a90e2"));
 
         pageTitle = (TextView) findViewById(R.id.pageTitle_TV);
         pageTitle.setText("Store");

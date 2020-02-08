@@ -5,70 +5,72 @@
     android:overScrollMode="never"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-<LinearLayout
-    android:id="@+id/loginForm"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:translationY="30dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/email_icon"
-        android:drawablePadding="15dp"
-        android:text="Email"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:translationX="50dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-        <requestFocus/>
-    </TextView>
-
-    <EditText
-        android:id="@+id/loginemail_input"
-        android:layout_width="281dp"
-        android:layout_height="wrap_content"
-        android:singleLine="false"
-        android:textSize="14sp"
-        android:theme="@style/EditTextTheme"
-        android:translationX="50dp" />"
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:drawableStart="@drawable/pwd_icon"
-        android:drawablePadding="15dp"
-        android:text="Password"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:translationX="50dp" />
-
-    <EditText
-        android:id="@+id/loginpassword_input"
-        android:inputType="textPassword"
-        android:layout_width="281dp"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:theme="@style/EditTextTheme"
-        android:translationX="50dp" />
     <LinearLayout
+        android:id="@+id/loginForm"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:translationY="30dp">
 
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="330dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/loginsignupbutton"
-            android:text="@string/logintext"
-            android:textColor="#FFFFFF"
-            android:translationY="10dp"
-            />
+            android:drawableStart="@drawable/email_icon"
+            android:drawablePadding="15dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="@string/email"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:translationX="50dp">
+
+            <requestFocus />
+        </TextView>
+
+        <EditText
+            android:id="@+id/loginemail_input"
+            android:layout_width="281dp"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:textSize="14sp"
+            android:theme="@style/EditTextTheme"
+            android:translationX="50dp" />"
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/pwd_icon"
+            android:drawablePadding="15dp"
+            android:text="@string/password"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:translationX="50dp" />
+
+        <EditText
+            android:id="@+id/loginpassword_input"
+            android:layout_width="281dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textSize="14sp"
+            android:theme="@style/EditTextTheme"
+            android:translationX="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/loginsignupbutton"
+                android:text="@string/logintext"
+                android:textColor="#FFFFFF"
+                android:translationY="10dp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </ScrollView>
