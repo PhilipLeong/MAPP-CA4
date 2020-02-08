@@ -103,6 +103,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         msg.setText("Please enter valid credentials");
         errorDialog.show();
     }
+
     public void onClick(View view){
         if(view == signinButton) {
             userLogin();
