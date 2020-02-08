@@ -3,6 +3,8 @@ package mapp.com.sg.bookhub;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.nfc.Tag;
@@ -32,11 +34,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import mapp.com.sg.bookhub.Models.Order;
 import mapp.com.sg.bookhub.Models.Post;
 import mapp.com.sg.bookhub.Models.User;
@@ -48,7 +53,6 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     private ImageButton backBtn;
     private Post book;
 
-    private ProgressDialog progessDialog;
 
     private String school;
     private String TAG = "BOOK DETAILS";
@@ -73,22 +77,25 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
     private User seller;
 
-    //error pop-up
-    private Dialog errorDialog;
-    private ImageButton errorCross;
-    private TextView errorTV;
+    private Dialog profileDialog;
 
-    //success pop-up
-    private Dialog successDialog;
-    private ImageButton successCross;
-    private TextView successTV;
+    private TextView popupemail;
+    private TextView popupbio;
+    private TextView popupusername;
+    private TextView popupschoolcourse;
+    private CircleImageView popupprofilepic;
+    private ImageButton profileCross;
 
+
+    public SharedPreferences preferences;
+    public static final String MYPREFERENCES = "BOOKDETAILS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookdetails);
 
+        preferences = getSharedPreferences(MYPREFERENCES, MODE_PRIVATE);
 
         Intent intent = getIntent();
         book = (Post) intent.getSerializableExtra("BOOK");
@@ -172,20 +179,22 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         });
 
 
+        profileDialog = new Dialog(this);
+        profileDialog.setContentView(R.layout.profilepopup);
+        profileCross = profileDialog.findViewById(R.id.exit_btn);
+        sellerProfile = (ImageButton) findViewById(R.id.seller_profile);
 
 
-        progessDialog = new ProgressDialog(this);
-        errorDialog = new Dialog(this);
-        errorDialog.setContentView(R.layout.errorpopup);
-        errorCross = errorDialog.findViewById(R.id.exit_btn);
-        errorCross.setOnClickListener(this);
-        errorTV = errorDialog.findViewById(R.id.error_TV);
+        popupemail = (TextView) profileDialog.findViewById(R.id.myemail_TV);
+        popupusername = (TextView) profileDialog.findViewById(R.id.myname_TV);
+        popupbio = (TextView) profileDialog.findViewById(R.id.mybio_TV);
+        popupschoolcourse = (TextView) profileDialog.findViewById(R.id.mycourse_TV);
+        popupprofilepic = (CircleImageView) profileDialog.findViewById(R.id.userImage_IV);
 
-        successDialog = new Dialog(this);
-        successDialog.setContentView(R.layout.successpopup);
-        successCross = successDialog.findViewById(R.id.back_btn);
-        successCross.setOnClickListener(this);
-        successTV = successDialog.findViewById(R.id.success_TV);
+
+        sellerProfile.setOnClickListener(this);
+        profileCross.setOnClickListener(this);
+
 
 
     }
@@ -198,64 +207,32 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
             startActivity(intent);
         }
         if (v == orderBtn) {
-            progessDialog.setMessage("Placing your order...");
-            progessDialog.show();
-            createOrder();
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("Title", book.getTitle());
+            editor.putString("ISBN", book.getIsbn());
+            editor.putString("Price", (String) price.getText());
+            editor.putString("Mass", (String) mass.getText());
+            editor.putString("Location", book.getLocation());
+            editor.putString("Schedule", book.getSchedule());
+            editor.putString("Payments", (String) payment.getText());
+            editor.putString("Id", book.getKey());
+            editor.putString("ImgUrl", book.getImgs().get(0));
+
+            editor.commit();
+            Intent intent = new Intent(this, OrderConfirmationActivity.class);
+            intent.putExtra("BOOK", book);
+            startActivity(intent);
+        }
+
+        if(v == profileCross){
+            profileDialog.dismiss();
+        }
+        if(v == sellerProfile){
+            showPopup();
         }
     }
 
-    private void createOrder() {
-        Date currentTime = Calendar.getInstance().getTime();
 
-        Order newOrder = new Order(book.getKey(), userId, currentTime.toString());
-        db.collection("Orders").document().set(newOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                updatePost();
-                progessDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "You have made a post! ", Toast.LENGTH_SHORT);
-                Log.d(TAG, "Place an order successfully!");
-                showSuccessPopup("You have placed the order!");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error happened in ordering", e);
-                        progessDialog.dismiss();
-                        showErrorPopup("Failed to place order! Please Try again.");
-                    }
-                });
-    }
-
-    private void updatePost() {
-        book.setHasBeenBought(true);
-        db.collection("Posts").document(book.getKey()).set(book).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "Updated a post to been bought!");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error happened in updating", e);
-                    }
-                });
-
-    }
-
-    private void showErrorPopup(String errorMessage) {
-        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        errorTV.setText(errorMessage);
-        errorDialog.show();
-    }
-
-    private void showSuccessPopup(String successMessage) {
-        successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        successTV.setText(successMessage);
-        successDialog.show();
-    }
 
     private boolean isMyBook() {
         String bookCreatedBy = book.getCreatedBy();
@@ -263,4 +240,37 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         Log.d(TAG, "I'm " + userId);
         return bookCreatedBy.equals(userId);
     }
+
+    private void showPopup(){
+        profileDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        DocumentReference docRef = db.collection("users").document(book.getCreatedBy());
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                seller = documentSnapshot.toObject(User.class);
+                Log.d("Data", String.valueOf(documentSnapshot));
+                popupemail.setText("Email: ???????????");
+                popupusername.setText(seller.getAccount());
+                popupbio.setText("Bio: "+seller.getBio());
+                popupschoolcourse.setText("Course: "+seller.getSchoolCourse());
+
+                final StorageReference reference = FirebaseStorage.getInstance().getReference();
+                reference.child("profileImages").child(userId+".jpeg").getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        popupprofilepic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+            }
+        });
+        Log.d("InputEmail",popupemail.getText().toString());
+        profileDialog.show();
+    }
+
+
 }

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include4"
+        layout="@layout/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/bookBrief"
+        layout="@layout/bookpreview_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include4" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookBrief">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="20dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/mass_TV"
+                        android:layout_width="140dp"
+                        android:layout_column="1"
+                        android:drawableStart="@drawable/tick"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="Mass:"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/massVal_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="2"
+                        android:gravity="center_vertical|left"
+                        android:text="ASDDADS"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/item_TV"
+                        android:layout_width="140dp"
+                        android:layout_column="1"
+                        android:drawableStart="@drawable/tick"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="Item:"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/itemVal_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="2"
+                        android:gravity="center_vertical|left"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/delivery_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="1"
+                        android:drawableStart="@drawable/tick"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="Delivery:"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/deliveryVal_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="2"
+                        android:gravity="center_vertical|left"
+                        android:text="Self-pick"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/location_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="1"
+                        android:drawableStart="@drawable/tick"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="Location:"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/locationVal_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="2"
+                        android:gravity="center_vertical|left"
+                        android:text="dasda"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/schedule_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="1"
+                        android:drawableStart="@drawable/tick"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="Schedule:"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/scheduleVal_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="2"
+                        android:gravity="center_vertical|left"
+                        android:text="dasda"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/payment_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="1"
+                        android:drawableStart="@drawable/tick"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="Payment:"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/paymentVal_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="2"
+                        android:gravity="center_vertical|left"
+                        android:text="dasda"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/reminder_TV"
+                        android:layout_width="140dp"
+                        android:layout_column="1"
+                        android:drawableStart="@drawable/tick"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical|left"
+                        android:text="Reminder:"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/reminderVal_TV"
+                        android:layout_width="120dp"
+                        android:layout_column="2"
+                        android:gravity="center_vertical|left"
+                        android:text="Email"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/orderBtn"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/loginsignupbutton"
+        android:text="Order Now"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

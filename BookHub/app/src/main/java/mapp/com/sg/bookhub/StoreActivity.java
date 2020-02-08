@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,11 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
     private Button profileBtn;
     private Button storeBtn;
     private ImageButton postBtn;
+
+
+    private TextView pageTitle;
+    private ImageButton backHomeBtn;
+
 
 
     @Override
@@ -62,6 +68,12 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
         postBtn.setOnClickListener(this);
         profileBtn.setOnClickListener(this);
 
+
+        pageTitle = (TextView) findViewById(R.id.pageTitle_TV);
+        pageTitle.setText("Store");
+
+        backHomeBtn = (ImageButton) findViewById(R.id.back_btn);
+        backHomeBtn.setOnClickListener(this);
     }
 
     @Override
@@ -78,6 +90,10 @@ public class StoreActivity extends AppCompatActivity implements View.OnClickList
         else if(v == profileBtn){
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
+        }
+        else if (v == backHomeBtn){
+            Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
         }
         else{
             String school = ((Button) v).getText().toString();

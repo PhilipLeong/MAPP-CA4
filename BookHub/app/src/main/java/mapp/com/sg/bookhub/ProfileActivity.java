@@ -49,17 +49,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button storeBtn;
     private ImageButton postBtn;
     private ImageButton aboutBtn;
+
+    private TextView pageTitle;
+    private ImageButton backHomeBtn;
+
     private User user;
-    private Dialog profileDialog;
-    private ImageButton cross;
 
-    private TextView popupemail;
-    private TextView popupbio;
-    private TextView popupusername;
-    private TextView popupschoolcourse;
-    private CircleImageView popupprofilepic;
-
-    private Button profiledialogbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +64,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+
+        pageTitle = (TextView) findViewById(R.id.pageTitle_TV);
+        pageTitle.setText("My Profile");
+
+        backHomeBtn = (ImageButton) findViewById(R.id.back_btn);
+        backHomeBtn.setOnClickListener(this);
 
         email = (TextView) findViewById(R.id.myemail_TV);
         username = (TextView) findViewById(R.id.myname_TV);
@@ -84,21 +86,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         db = FirebaseFirestore.getInstance();
         userId = currentUser.getUid();
 
-        profileDialog = new Dialog(this);
-        profileDialog.setContentView(R.layout.profilepopup);
-        cross = profileDialog.findViewById(R.id.exit_btn);
-        profiledialogbtn = (Button) findViewById(R.id.profiledialogbtn);
-
-
-        popupemail = (TextView) profileDialog.findViewById(R.id.myemail_TV);
-        popupusername = (TextView) profileDialog.findViewById(R.id.myname_TV);
-        popupbio = (TextView) profileDialog.findViewById(R.id.mybio_TV);
-        popupschoolcourse = (TextView) profileDialog.findViewById(R.id.mycourse_TV);
-        popupprofilepic = (CircleImageView) profileDialog.findViewById(R.id.userImage_IV);
-
-
-        profiledialogbtn.setOnClickListener(this);
-        cross.setOnClickListener(this);
 
         aboutBtn.setOnClickListener(this);
         storeBtn.setOnClickListener(this);
@@ -111,36 +98,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         loadDetails();
     }
 
-    private void showPopup(){
-        profileDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        DocumentReference docRef = db.collection("users").document(userId);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                user = documentSnapshot.toObject(User.class);
-                Log.d("Data", String.valueOf(documentSnapshot));
-                popupemail.setText("Email: "+currentUser.getEmail());
-                popupusername.setText(user.getAccount());
-                popupbio.setText("Bio: "+user.getBio());
-                popupschoolcourse.setText("Course: "+user.getSchoolCourse());
 
-                final StorageReference reference = FirebaseStorage.getInstance().getReference();
-                reference.child("profileImages").child(userId+".jpeg").getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        popupprofilepic.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
-                });
-            }
-        });
-        Log.d("InputEmail",popupemail.getText().toString());
-        profileDialog.show();
-    }
 
     private void loadDetails(){
         DocumentReference docRef = db.collection("users").document(userId);
@@ -183,11 +141,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
-        if(v == cross){
-            profileDialog.dismiss();
-        }
-        if(v == profiledialogbtn){
-            showPopup();
+        if (v == backHomeBtn){
+            Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
         }
     }
 

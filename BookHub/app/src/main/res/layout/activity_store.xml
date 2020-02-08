@@ -6,20 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/pageTitle_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
-        android:fontFamily="sans-serif"
-        android:text="Store"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+    <include
+        android:id="@+id/pageTitle"
+        layout="@layout/topbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout"
@@ -32,7 +23,7 @@
         android:stretchMode="columnWidth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle_TV">
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle">
 
         <Button
             android:id="@+id/soc_Btn"
