@@ -53,8 +53,8 @@ public class ImageAdapter extends PagerAdapter {
 
         Log.d("The image url", urls[position]);
         StorageReference downloadURL = FirebaseStorage.getInstance().getReferenceFromUrl(urls[position]);
-        final long ONE_MEGABYTE = 1024 * 1024;
-        downloadURL.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        final long TWO_MEGABYTE = 4096 * 4096;
+        downloadURL.getBytes(TWO_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 imageView.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
