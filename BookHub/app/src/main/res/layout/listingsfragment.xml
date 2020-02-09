@@ -24,8 +24,8 @@
 
     <ImageView
         android:id="@+id/nobook_IV"
-        android:layout_width="290dp"
-        android:layout_height="268dp"
+        android:layout_width="209dp"
+        android:layout_height="146dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

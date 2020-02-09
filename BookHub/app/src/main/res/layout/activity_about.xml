@@ -28,11 +28,14 @@
 
     <TextView
         android:id="@+id/about_description"
-        android:layout_width="372dp"
-        android:layout_height="105dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:lineSpacingExtra="6dp"
         android:text="@string/app_description"
-        android:textAlignment="center"
-        android:textColor="@color/colorMain"
+        android:textAlignment="textStart"
+        android:textColor="#79817E"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

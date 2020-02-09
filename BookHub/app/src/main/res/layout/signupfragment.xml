@@ -24,21 +24,21 @@
 
     <TextView
         android:id="@+id/uploadtext"
-        android:layout_width="wrap_content"
+        android:layout_width="149dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:layout_marginTop="5dp"
-        android:text="@string/uploadimg"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:textAlignment="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/uploadimg"
+        android:textAlignment="viewStart"
         android:textColor="#5C99E4"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:translationX="137dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:translationX="120dp">
 
-        <requestFocus/>
+        <requestFocus />
     </TextView>
 
     <TextView

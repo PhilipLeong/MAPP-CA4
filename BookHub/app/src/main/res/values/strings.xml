@@ -6,7 +6,7 @@
     <string name="app_name">BookHub</string>
     <string name="slogan">Spend less. Read more.</string>
     <string name="title_activity_profile">Profile</string>
-    <string name="app_description">BookHub aims to provide a platform for polytehnic students, especially Singapore Polytechnic students to buy and sell second-hand textbooks</string>
+    <string name="app_description">Welcome to Bookhub. \nThe app user can be both buyer and seller. \nFor the buyer, he/she can simply look for the books in “Store” and make an order if he/she finds the book he/she needs.  Buyer can also view the seller’s profile to get his/her email contact. \nAs seller, he/she can post the book to our app through “Post” for others to take a look and make an order. \nOnce an order is placed or received, the user can keep track with it in “My Profile”.</string>
     <string name="defaulttitle">Page Title</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
