@@ -49,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private TextView pageTitle;
     private ImageButton backHomeBtn;
+    private ImageButton aboutbtn;
 
     private User user;
 
@@ -77,11 +78,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileBtn = (Button) findViewById(R.id.profile_Btn);
         storeBtn = (Button) findViewById(R.id.store_Btn);
         postBtn = (ImageButton) findViewById(R.id.post_Btn);
+        aboutbtn = (ImageButton) findViewById(R.id.aboutus);
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
         userId = currentUser.getUid();
 
+        aboutbtn.setOnClickListener(this);
         storeBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
 
@@ -133,6 +136,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if (v == backHomeBtn){
             Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
+        }
+        if(v == aboutbtn){
+            Intent i = new Intent(this, AboutActivity.class);
             startActivity(i);
         }
     }

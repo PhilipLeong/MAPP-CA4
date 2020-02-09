@@ -63,7 +63,9 @@ public class ListingsAdapter extends BaseAdapter {
         final TextView price = (TextView) convertView.findViewById(R.id.bookPrice1_TV);
         final Button editpost = (Button) convertView.findViewById(R.id.editpost_Btn);
         String pricetext = df2.format(postItem.getPrice());
-
+        if(postItem.getHasBeenBought() == true){
+            editpost.setVisibility(View.GONE);
+        }
 
         title.setText(postItem.getTitle());
         price.setText("SGD "+ pricetext);

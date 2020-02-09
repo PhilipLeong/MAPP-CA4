@@ -44,45 +44,45 @@
 
         <LinearLayout
             android:layout_width="214dp"
-            android:layout_height="110dp"
+            android:layout_height="142dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="148dp"
             android:layout_marginTop="43dp"
-            android:layout_marginEnd="17dp"
-            android:layout_marginBottom="51dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/myemail_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginBottom="5dp"
                 android:drawableStart="@drawable/email_icon"
                 android:drawablePadding="15dp"
-                android:layout_gravity="center_vertical"
                 android:gravity="center_vertical|left"
-                android:textSize="14sp"  />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/mybio_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginBottom="5dp"
                 android:drawableStart="@drawable/bio_icon"
-                android:layout_gravity="center_vertical"
                 android:drawablePadding="15dp"
                 android:gravity="center_vertical|left"
-                android:textSize="14sp"  />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/mycourse_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/course_icon"
                 android:layout_gravity="center_vertical"
+                android:drawableStart="@drawable/course_icon"
                 android:drawablePadding="15dp"
                 android:gravity="center_vertical|left"
                 android:textSize="14sp" />
@@ -105,6 +105,17 @@
             android:singleLine="true"
             android:textAlignment="center"
             android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/aboutus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="168dp"
+            android:background="#00000000"
+            app:srcCompat="@drawable/aboutus" />
 
 
     </RelativeLayout>
