@@ -33,7 +33,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/soclogo"
-            android:text="SOC"
+            android:text="@string/radioSOC"
             app:layout_column="0"
             app:layout_row="0" />
 
@@ -46,7 +46,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/sblogo"
-            android:text="SB"
+            android:text="@string/radioSB"
             app:layout_column="1"
             app:layout_row="0" />
 
@@ -58,7 +58,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/maelogo"
-            android:text="MAE"
+            android:text="@string/radioMAE"
             app:layout_column="0"
             app:layout_row="1" />
 
@@ -71,7 +71,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/clslogo"
-            android:text="CLS"
+            android:text="@string/radioCLS"
             app:layout_column="1"
             app:layout_row="1" />
 
@@ -83,7 +83,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/abelogo"
-            android:text="ABE"
+            android:text="@string/radioABE"
             app:layout_column="0"
             app:layout_row="2" />
 
@@ -96,7 +96,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/eeelogo"
-            android:text="EEE"
+            android:text="@string/radioEEE"
             app:layout_column="1"
             app:layout_row="2" />
 
@@ -108,7 +108,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/madlogo"
-            android:text="MAD"
+            android:text="@string/radioMAD"
             app:layout_column="0"
             app:layout_row="3" />
 
@@ -121,7 +121,7 @@
             android:height="120dp"
             android:background="#00FFFFFF"
             android:drawableTop="@drawable/smalogo"
-            android:text="SMA"
+            android:text="@string/radioSMA"
             app:layout_column="1"
             app:layout_row="3" />
 

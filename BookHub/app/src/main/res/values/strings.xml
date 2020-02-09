@@ -16,7 +16,7 @@
     <string name="uploadimg">Upload Profile Picture</string>
     <string name="store">Store</string>
     <string name="profile">Profile</string>
-
+    <string name="post">Post</string>
     <string name="details">Add basic details</string>
     <string name="title">Book Title</string>
     <string name="isbn">ISBN</string>
@@ -39,6 +39,8 @@
     <string name="checkboxcash">Cash</string>
     <string name="checkboxpaylah">PayLah</string>
     <string name="checkboxpaynow">PayNow</string>
+    <string name="bookdetails">BookTitle-ISBN-Author</string>
+    <string name="order">Order now</string>
 
 
 </resources>
